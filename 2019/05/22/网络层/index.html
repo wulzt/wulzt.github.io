@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="网络层 网络层关注的是如何将分组从源端沿着网络路径送达目的端。 在计算机网络领域，网络层应该向运输层提供怎样的服务，也就是说，在计算机通信中，可靠交付应当由谁来负责？ 是网络还是端系统 注：答案是端系统负责，就是IP客户端和服务端，服务端发现包发错了，就会让客户端重发，如果是网络负责的话， 就是说客户端发到任何一个路由器，路由器还要检查包错没错，错了让客户端重发，这就特别耗时和耗资源。     1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2019/05/22/网络层/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="网络层 网络层关注的是如何将分组从源端沿着网络路径送达目的端。 在计算机网络领域，网络层应该向运输层提供怎样的服务，也就是说，在计算机通信中，可靠交付应当由谁来负责？ 是网络还是端系统 注：答案是端系统负责，就是IP客户端和服务端，服务端发现包发错了，就会让客户端重发，如果是网络负责的话， 就是说客户端发到任何一个路由器，路由器还要检查包错没错，错了让客户端重发，这就特别耗时和耗资源。     1">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/IP%E5%9C%B0%E5%9D%80.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/IP%E5%9C%B0%E5%9D%80%E5%92%8CMac%E5%9C%B0%E5%9D%80.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%885.28.44.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/IP%E6%95%B0%E6%8D%AE%E6%8A%A5.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%887.38.16.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%888.48.12.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%888.48.29.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%888.52.24.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.04.03.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.06.17.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.06.32.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.06.44.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%8811.15.59.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-06-07%2011.12.17.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-06-07%2016.18.17.png">
+<meta property="og:updated_time" content="2019-06-08T04:11:10.359Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="网络层 网络层关注的是如何将分组从源端沿着网络路径送达目的端。 在计算机网络领域，网络层应该向运输层提供怎样的服务，也就是说，在计算机通信中，可靠交付应当由谁来负责？ 是网络还是端系统 注：答案是端系统负责，就是IP客户端和服务端，服务端发现包发错了，就会让客户端重发，如果是网络负责的话， 就是说客户端发到任何一个路由器，路由器还要检查包错没错，错了让客户端重发，这就特别耗时和耗资源。     1">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/IP%E5%9C%B0%E5%9D%80.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/22/网络层/">
+
+
+
+
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/网络层/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-22T17:04:13+08:00">
+                2019-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h1><blockquote>
+<p>网络层关注的是如何将分组从源端沿着网络路径送达目的端。 在计算机网络领域，网络层应该向运输层提供怎样的服务，也就是说，在计算机通信中，可靠交付应当由谁来负责？ 是网络还是端系统 注：答案是端系统负责，就是IP客户端和服务端，服务端发现包发错了，就会让客户端重发，如果是网络负责的话， 就是说客户端发到任何一个路由器，路由器还要检查包错没错，错了让客户端重发，这就特别耗时和耗资源。   </p>
+</blockquote>
+<h2 id="1-提供两种服务"><a href="#1-提供两种服务" class="headerlink" title="1.  提供两种服务"></a>1.  提供两种服务</h2><ul>
+<li><input disabled type="checkbox"> <strong>虚拟电路服务</strong><br>虚拟电路表示一条逻辑上的链接，而不是建立一条真正的物理链接。请注意，电路交换的电话通信是先建立了一条 真正的连接。理解的话，相对于我们平时的路由器来看，路由器是根据自己的路由表，临时决定最佳的路径，不是 开始就定好了，虚电路服务就相当于开始就定好了，所以定好的路线如果有结点发生故障，就不能工作了。</li>
+<li><input disabled type="checkbox"> <strong>数据报服务</strong><br>网络层向上只提供简单灵活的、无连接的、尽最大努力的数据报服务。网络在发送分组时不需要先建立连接。每 一个分组（即IP数据报）独立发送，与其前后的分组无关（不进行编号） 网络层不提供服务质量的承诺。即所传送的分组可能出错、丢失、重复和失序（不按顺序到达终点），当然也不 保证分组传送的时间限制</li>
+</ul>
+<h2 id="2-网际协议IP"><a href="#2-网际协议IP" class="headerlink" title="2. 网际协议IP"></a>2. 网际协议IP</h2><p><strong>2.1 虚拟互联网</strong></p>
+<blockquote>
+<p> 首先需要了解网络互联的设备<br>中间设备又称为中间系统或中继系统  </p>
+<ul>
+<li>物理层中继系统：集线器（hub）用来放大物理信号的  </li>
+<li>数据链路层中继系统：网桥或交换机  </li>
+<li>网络层中继系统： 路由器  </li>
+<li>网络层以上的中继系统：网关（通常网关就是路由器的地址）  </li>
+</ul>
+</blockquote>
+<blockquote>
+<p>1、所谓虚拟互联网络，意思就是互相起来的各种物理网络的异构性本来就是客观存在的，但我们利用IP 协议就可以使这些性能各异的网络从用户看起来好像是一个统一的网络<br>2、使用ip协议的虚拟互联网络可以简称位ip网<br>3、与IP协议相关的网络还有<br>    3.1 地址解析协议 ARP<br>    3.2 逆地址解析协议 RARP<br>    3.3 网际控制协议ICMP<br>    3.4 网际组管理协议 IGMP  </p>
+</blockquote>
+<p><strong>2.2分类的IP地址</strong></p>
+<ul>
+<li>层次化IP地址</li>
+</ul>
+<blockquote>
+<p>1、IPv4地址是32位，分为网络地址和主机地址<br>2、路由器只需要把信息发到指定的网段，而不用关心具体发到哪个计算机上<br>3、网络地址（可以称位网络号）唯一制定了每个网络。同一网络中的每台计算机都会共享相同的网络地址，并用它作为自己IP地址的一部分  </p>
+</blockquote>
+<ul>
+<li>ABCD类网络地址</li>
+</ul>
+<p><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/IP%E5%9C%B0%E5%9D%80.png" alt></p>
+<blockquote>
+<p>A类地址：网络号第1部分，也就是8位2进制是0打头。所以它的范围是1-127，这是A类地址的范围<br>B类地址：网络号第1部分，也就是8位2进制是10打头。所以它的范围是128-191，这是B类地址的范围<br>C类地址：网络号第1部分，也就是8位2进制是110打头。所以它的范围是192-223，这是C类地址的范围<br>在同一个局域网上的主机或路由器的IP地址中的网络号部分必须是一样的。  </p>
+</blockquote>
+<ul>
+<li>几个特殊的地址</li>
+</ul>
+<blockquote>
+<p>1、127.0.0.1 本地环回地址<br>2、169.254.0.0 windows系统自动分配地址时，DHCP服务器没给地址，计算机没办法，临时生成的地址<br>3、保留的私网地址<br>    3.1 10.0.0.0<br>    3.2 172.16.0.0 — 172.31.0.0<br>    3.3 192.168.0.0 —192.168.255.0  </p>
+</blockquote>
+<p><strong>2.3 IP地址和硬件地址</strong><br><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/IP%E5%9C%B0%E5%9D%80%E5%92%8CMac%E5%9C%B0%E5%9D%80.png" alt><br><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%885.28.44.png" alt></p>
+<blockquote>
+<p>路由器<strong>只根据目的站的 IP 地址的网络号进行路由选择</strong>。  
+在具体的物理网络的链路层只能看见 MAC 帧而看不见 IP 数据报<br>IP 层抽象的互联网屏蔽了下层很复杂的细节。<br>在抽象的网络层上讨论问题，就能够使用统一的、抽象的 IP 地址研究主机和主机或主机和路由器之间的通信 。  </p>
+</blockquote>
+<p><strong>2.4 地址解析协议 ARP</strong></p>
+<ul>
+<li>作用： 从网络层使用的 IP 地址，解析出在数据链路层使用的硬件地址。</li>
+</ul>
+<p>不管网络层使用的是什么协议，在实际网络的链路上传送数据帧时，<strong>最终还是必须使用硬件地址</strong>。 每一个主机都设有一个 ARP 高速缓存 (ARP cache)，里面有所在的局域网上的<strong>各主机和路由器的 IP 地址到硬件地址的映射表</strong></p>
+<p>解析的过程：</p>
+<ul>
+<li>当主机 A 欲向本局域网上的某个主机 B 发送 IP 数据报时，就先在其 ARP 高速缓存中查看有无主机 B 的 IP 地址。</li>
+<li>如有，就可查出其对应的硬件地址，再将此硬件地址写入 MAC 帧，然后通过局域网将该 MAC 帧发往此硬件地址。</li>
+<li>如没有， ARP 进程在本局域网上广播发送一个 ARP 请求分组。收到 ARP 响应分组后，将得到的 IP 地址到硬件地址的映射写入 ARP 高速缓存。</li>
+</ul>
+<p>ARP 是<strong>解决同一个局域网上的主机或路由器的 IP 地址和硬件地址的映射问题</strong>。</p>
+<ul>
+<li>如果所要找的主机和源主机<strong>不在同一个局域网上</strong>，那么就要通过 ARP 找到一个位于本局域网上的某个路由器的硬件地址，然后把<strong>分组发送给这个路由器</strong>，让这个路由器把分组转发给下一个网络。剩下的工作就由<strong>下一个网络来做</strong>。</li>
+</ul>
+<p>从 IP 地址到硬件地址的<strong>解析是自动进行的</strong>，主机的用户对这种地址解析过程是不知道的</p>
+<p><strong>2.5 IP数据报</strong><br><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/IP%E6%95%B0%E6%8D%AE%E6%8A%A5.png" alt></p>
+<ul>
+<li><strong>首部的前一部分是固定长度</strong>，共 20 字节，是所有 IP 数据报必须具有的</li>
+<li>版本——占 4 位，<strong>指 IP 协议的版本</strong>。目前的 IP 协议版本号为 4 (即 IPv4)</li>
+<li>首部长度——占 4 位，可表示的最大数值是 15 个单位(一个单位为 4 字节)，因此 IP 的首部长度的最大值是 60 字节</li>
+<li>总长度——占 16 位，<strong>指首部和数据之和的长度，单位为字节</strong>，因此数据报的最大长度为 65535 字节。总长度必须不超过最大传送单元 MTU。</li>
+<li>标志(flag) ——占 3 位，<strong>目前只有前两位有意义</strong>。标志字段的最低位是 MF (More Fragment)。MF  1 表示后面“还有分片”。MF  0 表示最后一个分片。标志字段中间的一位是 DF (Don’t Fragment) 。只有当 DF  0 时才允许分片。</li>
+<li>片偏移—— 占13 位，指出：<strong>较长的分组在分片后某片在原分组中的相对位置</strong>。片偏移以 8 个字节为偏移单位。</li>
+<li>生存时间——占8 位，记为 TTL (Time To Live)，<strong>指示数据报在网络中可通过的路由器数的最大值</strong>。</li>
+<li>协议——占8 位，<strong>指出此数据报携带的数据使用何种协议</strong>，以便目的主机的 IP 层将数据部分上交给那个处理过程</li>
+<li>首部检验和——占16 位，<strong>只检验数据报的首部，不检验数据部分</strong>。这里不采用 CRC 检验码而采用简单的计算方法。</li>
+<li>源地址和目的地址都各占 4 字节</li>
+</ul>
+<p>IP数据包是可支持多种协议的：<strong>IP 数据报可以封装多种协议 PDU。</strong><br><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%887.38.16.png" alt></p>
+<p><strong>2.6 分组转发流程</strong></p>
+<ul>
+<li>IP 数据报的首部中<strong>没有地方可以用来指明“下一跳路由器的 IP 地址”。</strong></li>
+<li>当路由器收到待转发的数据报，不是将下一跳路由器的 IP 地址填入 IP 数据报，<strong>而是送交下层的网络接口软件。</strong></li>
+<li>网络接口软件使用 ARP 负责将下一跳路由器的 IP 地址转换成硬件地址，<strong>并将此硬件地址放在链路层的 MAC 帧的首部，然后根据这个硬件地址找到下一跳路由器</strong></li>
+</ul>
+<p>在路由表中，对每一条路由，最主要的是（目的网络地址，下一跳地址） </p>
+<ul>
+<li>IP 数据报最终一定可以找到目的主机所在目的网络上的路由器（可能要通过多次的间接交付）。</li>
+<li><strong>只有到达最后一个路由器时，才试图向目的主机进行直接交付</strong>。</li>
+</ul>
+<p>分组转发算法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(1)  从数据报的首部提取目的主机的 IP 地址 D, 得出目的网络地址为 N。(2)  若网络 N 与此路由器直接相连，则把数据报直接交付目的主机 D；否则是间接交付，执行(3)。(3)  若路由表中有目的地址为 D 的特定主机路由，则把数据报传送给路由表中所指明的下一跳路由器；否则，执行(4)。(4)  若路由表中有到达网络 N 的路由，则把数据报传送给路由表指明的下一跳路由器；否则，执行(5)。(5) 若路由表中有一个默认路由，则把数据报传送给路由表中所指明的默认路由器；否则，执行(6)。(6)  报告转发分组出错。</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-子网掩码-与-子网划分-与-构造超网（无分类编址CIDR）"><a href="#3-子网掩码-与-子网划分-与-构造超网（无分类编址CIDR）" class="headerlink" title="3. 子网掩码 与 子网划分 与 构造超网（无分类编址CIDR）"></a>3. 子网掩码 与 子网划分 与 构造超网（无分类编址CIDR）</h2><p><strong>3.1 划分子网</strong><br>从两级IP变成三级IP</p>
+<ul>
+<li>划分子网纯属一个单位内部的事情。单位对外仍然表现为没有划分子网的网络。</li>
+<li>从主机号借用若干个位作为子网号 subnet-id，而主机号 host-id 也就相应减少了若干个位。</li>
+</ul>
+<p>那么自从使用了子网划分以后，我们的<strong>分组转发就会变得简单一些：通过目的子网号能过滤出不少的主机</strong></p>
+<ol>
+<li>凡是从其他网络发送给本单位某个主机的 IP 数据报，仍然是根据 IP 数据报的目的网络号 net-id，先找到连接在本单位网络上的路由器。</li>
+<li>然后此<strong>路由器在收到 IP 数据报后，再按目的网络号 net-id 和子网号 subnet-id 找到目的子网。</strong></li>
+<li>最后就将 IP 数据报直接交付目的主机。</li>
+</ol>
+<p><strong>3.2 子网掩码</strong></p>
+<ul>
+<li>(IP 地址) AND (子网掩码) =网络地址<br><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%888.48.12.png" alt><br><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%888.48.29.png" alt></li>
+</ul>
+<blockquote>
+<p>但在划分子网的情况下，从 IP 地址却不能唯一地得出网络地址来，这是因为网络地址取决于那个网络所采用的子网掩码，但数据报的首部并没有提供子网掩码的信息。  </p>
+<p> 因此分组转发的算法也必须做相应的改动。  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(1) 从收到的分组的首部提取目的 IP 地址 D。(2) 先用各网络的子网掩码和 D 逐位相“与”，看是否和     相应的网络地址匹配。若匹配，则将分组直接交付。     否则就是间接交付，执行(3)。(3) 若路由表中有目的地址为 D 的特定主机路由，则将     分组传送给指明的下一跳路由器；否则，执行(4)。(4) 对路由表中的每一行的子网掩码和 D 逐位相“与”，     若其结果与该行的目的网络地址匹配，则将分组传送     给该行指明的下一跳路由器；否则，执行(5)。(5) 若路由表中有一个默认路由，则将分组传送给路由表     中所指明的默认路由器；否则，执行(6)。(6) 报告转发分组出错。</span><br></pre></td></tr></table></figure>
+
+<p><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%888.52.24.png" alt></p>
+<p><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.04.03.png" alt><br><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.06.17.png" alt><br><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.06.32.png" alt><br><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.06.44.png" alt></p>
+<p><strong>3.3 无分类编址CIDR</strong></p>
+<p>提出的背景:</p>
+<blockquote>
+<p>划分子网在一定程度上缓解了互联网在发展中遇到的困难。然而在 1992 年互联网仍然面临三个必须尽早解决的问题：<br> (1) B 类地址在 1992 年已分配了近一半，眼看就要在 1994 年 3 月全部分配完毕！<br>(2) 互联网主干网上的路由表中的项目数急剧增长（从几千个增长到几万个）。<br>(3) 整个 IPv4 的地址空间最终将全部耗尽  </p>
+</blockquote>
+<p>CIDR干了什么：</p>
+<ul>
+<li>CIDR消除了传统的 A 类、B 类和 C 类地址以及划分子网的概念，因而可以更加有效地分配 IPv4 的地址空间。</li>
+<li>CIDR使用各种长度的“网络前缀”(network-prefix)来代替分类地址中的网络号和子网号。</li>
+<li>IP 地址从三级编址（使用子网掩码）又回到了两级编址。 </li>
+</ul>
+<p>CIDR 使用“斜线记法”(slash notation)，它又称为 CIDR 记法，<strong>即在 IP 地址面加上一个斜线“/”，然后写上网络前缀所占的位数（这个数值对应于三级编址中子网掩码中 1 的个数）</strong>。例如： 220.78.168.0/24</p>
+<p>无分类的两级编址的记法是：<br><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%8811.15.59.png" alt></p>
+<ul>
+<li>CIDR 还使用“斜线记法”(slash notation)，它又称为CIDR记法，即在 IP 地址面加上一个斜线“/”，然后写上网络前缀所占的位数（这个数值对应于三级编址中子网掩码中 1 的个数）。</li>
+<li>CIDR 把网络前缀都相同的连续的 IP 地址组成“CIDR 地址块”。</li>
+</ul>
+<h2 id="4-网际控制报文协议-ICMP"><a href="#4-网际控制报文协议-ICMP" class="headerlink" title="4. 网际控制报文协议 ICMP"></a>4. 网际控制报文协议 ICMP</h2><ul>
+<li>ICMP 报文作为 IP 层数据报的数据，加上数据报的首部，组成 IP 数据报发送出去</li>
+<li>ICMP 允许主机或路由器报告差错情况和提供有关异常情况的报告</li>
+</ul>
+<p>4.1 ICMP 报文的种类</p>
+<ul>
+<li>ICMP 报文的种类有两种，即 ICMP 差错报告报文和 ICMP 询问报文。 </li>
+<li>ICMP 报文的前 4 个字节是统一的格式，共有三个字段：即类型、代码和检验和。接着的 4 个字节的内容与 ICMP 的类型有关</li>
+</ul>
+<ul>
+<li><input disabled type="checkbox"> 差错报告报文</li>
+</ul>
+<ol>
+<li>终点不可达 </li>
+<li>源点抑制(Source quench)  </li>
+<li>时间超过 </li>
+<li>参数问题 </li>
+<li>改变路由（重定向）(Redirect)<br><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-06-07%2011.12.17.png" alt></li>
+</ol>
+<ul>
+<li><input disabled type="checkbox"> 询问报文</li>
+</ul>
+<ol>
+<li>回送请求和回答</li>
+<li>时间戳请求和回答</li>
+</ol>
+<p>4.2 ICMP应用举例<br><strong>PING分组网间探测</strong>，用来测试两个主机之间的连通性，使用了回送请求和回送回答报文。应用层直接使用网络层，没有通过运输层的TCP或UDP</p>
+<h2 id="5-因特网的路由选择协议"><a href="#5-因特网的路由选择协议" class="headerlink" title="5. 因特网的路由选择协议"></a>5. 因特网的路由选择协议</h2><ul>
+<li>静态路由选择策略——即非自适应路由选择，其特点是简单和开销较小，但不能及时适应网络状态的变化。 </li>
+<li>动态路由选择策略——即自适应路由选择，其特点是能较好地适应网络状态的变化，但实现起来较为复杂，开销也比较大。</li>
+</ul>
+<p>自治系统AS</p>
+<p>因特网有两大类路由选择协议</p>
+<ul>
+<li><input disabled type="checkbox"> 内部网关协议 <strong>IGP</strong> (Interior Gateway Protocol)    即在一个自治系统内部使用的路由选择协议。目前这类路由选择协议使用得最多，如 <strong>RIP</strong> 和 <strong>OSPF</strong> 协议。</li>
+<li><input disabled type="checkbox"> 外部网关协议<strong>EGP</strong> (External Gateway Protocol)    若源站和目的站处在不同的自治系统中，当数据报传到一个自治系统的边界时，就需要使用一种协议将路由选择信息传递到另一个自治系统中。这样的协议就是外部网关协议 EGP。在外部网关协议中目前使用最多的是 <strong>BGP-4</strong></li>
+</ul>
+<p>自治系统之间的路由选择也叫做域间路由选择<br>在自治系统内部的路由选择叫做域内路由选择</p>
+<p><strong>5.2 内部网关协议 RIP</strong><br>RIP 是一种分布式的基于距离向量的路由选择协议<br>RIP 协议要求网络中的每一个路由器都要维护从它自己到其他每一个目的网络的距离记录</p>
+<p>三个要点：</p>
+<ul>
+<li>仅和相邻路由器交换信息。 </li>
+<li>交换的信息是当前本路由器所知道的全部信息，即自己的路由表。 </li>
+<li>按固定的时间间隔交换路由信息，例如，每隔 30 秒</li>
+</ul>
+<p>距离向量算法：<br><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-06-07%2016.18.17.png" alt></p>
+<p>主要缺点：好消息传播得快，而坏消息传播得慢，网络出故障的传播时间往往需要较长的时间(例如数分钟)</p>
+<p><strong>5.3 内部网关协议 OSPF</strong><br>是分布式的链路状态协议</p>
+<p>三个要点：</p>
+<ul>
+<li>向本自治系统中所有路由器发送信息，这里使用的方法是洪泛法。</li>
+<li>发送的信息就是与本路由器相邻的所有路由器的链路状态，但这只是路由器所知道的部分信息。<ul>
+<li>“链路状态”就是说明本路由器都和哪些路由器相邻，以及该链路的“度量”(metric)。 </li>
+</ul>
+</li>
+<li>只有当链路状态发生变化时，路由器才用洪泛法向所有路由器发送此信息。</li>
+</ul>
+<p>链路状态数据库：</p>
+<ul>
+<li>由于各路由器之间频繁地交换链路状态信息，因此所有的路由器最终都能建立一个链路状态数据库。</li>
+<li>这个数据库实际上就是全网的拓扑结构图，它在全网范围内是一致的（这称为链路状态数据库的同步）。</li>
+<li>OSPF 的链路状态数据库能较快地进行更新，使各个路由器能及时更新其路由表。OSPF 的更新过程收敛得快是其重要优点</li>
+</ul>
+<p><strong>5.4 外部网关协议 BGP</strong></p>
+<p>不同自治系统的路由器之间交换路由信息的协议</p>
+<p>#课内</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/23/应用层/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络层"><span class="nav-number">1.</span> <span class="nav-text">网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-提供两种服务"><span class="nav-number">1.1.</span> <span class="nav-text">1.  提供两种服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-网际协议IP"><span class="nav-number">1.2.</span> <span class="nav-text">2. 网际协议IP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-子网掩码-与-子网划分-与-构造超网（无分类编址CIDR）"><span class="nav-number">1.3.</span> <span class="nav-text">3. 子网掩码 与 子网划分 与 构造超网（无分类编址CIDR）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-网际控制报文协议-ICMP"><span class="nav-number">1.4.</span> <span class="nav-text">4. 网际控制报文协议 ICMP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-因特网的路由选择协议"><span class="nav-number">1.5.</span> <span class="nav-text">5. 因特网的路由选择协议</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
