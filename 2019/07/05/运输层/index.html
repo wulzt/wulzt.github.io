@@ -81,34 +81,34 @@
 
 <meta name="description" content="运输层1. 运输层协议概述1.1 概述运输层为相互通信的应用进程提供了逻辑通信  两个主机进行通信实际上就是两个主机中的应用进程互相通信。  应用进程之间的通信又称为端到端的通信。  运输层的一个很重要的功能就是复用和分用。应用层不同进程的报文通过不同的端口向下交到运输层，再往下就共用网络层提供的服务。  主要功能：  运输层为应用进程之间提供端到端的逻辑通信（但网络层是为主机之间提供逻辑通信）。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/2019/05/25/运输层/index.html">
+<meta property="og:title" content="运输层">
+<meta property="og:url" content="http://yoursite.com/2019/07/05/运输层/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="运输层1. 运输层协议概述1.1 概述运输层为相互通信的应用进程提供了逻辑通信  两个主机进行通信实际上就是两个主机中的应用进程互相通信。  应用进程之间的通信又称为端到端的通信。  运输层的一个很重要的功能就是复用和分用。应用层不同进程的报文通过不同的端口向下交到运输层，再往下就共用网络层提供的服务。  主要功能：  运输层为应用进程之间提供端到端的逻辑通信（但网络层是为主机之间提供逻辑通信）。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%881.32.20.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%881.32.27.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%881.56.43.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.01.14.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.04.47.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.06.37.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.22.05.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.24.12.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.39.34.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.39.59.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.39.50.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.42.04.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.48.33.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%883.04.04.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%883.10.21.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%883.14.27.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%883.27.14.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%883.26.58.png">
-<meta property="og:updated_time" content="2019-06-16T12:41:17.701Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%881.32.20.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%881.32.27.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%881.56.43.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.01.14.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.04.47.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.06.37.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.22.05.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.24.12.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.39.34.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.39.59.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.39.50.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.42.04.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%882.48.33.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%883.04.04.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%883.10.21.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%883.14.27.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%883.27.14.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%883.26.58.png">
+<meta property="og:updated_time" content="2019-07-05T07:53:37.699Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="运输层">
 <meta name="twitter:description" content="运输层1. 运输层协议概述1.1 概述运输层为相互通信的应用进程提供了逻辑通信  两个主机进行通信实际上就是两个主机中的应用进程互相通信。  应用进程之间的通信又称为端到端的通信。  运输层的一个很重要的功能就是复用和分用。应用层不同进程的报文通过不同的端口向下交到运输层，再往下就共用网络层提供的服务。  主要功能：  运输层为应用进程之间提供端到端的逻辑通信（但网络层是为主机之间提供逻辑通信）。">
-<meta name="twitter:image" content="http://yoursite.com/2019/05/25/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%881.32.20.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/05/运输层/%E8%BF%90%E8%BE%93%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-26%20%E4%B8%8B%E5%8D%881.32.20.png">
 
 
 
@@ -138,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/25/运输层/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/05/运输层/">
 
 
 
 
 
-  <title> | Hexo</title>
+  <title>运输层 | Hexo</title>
   
 
 
@@ -251,7 +251,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/25/运输层/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/05/运输层/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -268,7 +268,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">运输层</h1>
         
 
         <div class="post-meta">
@@ -280,8 +280,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-25T21:54:35+08:00">
-                2019-05-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-05T15:49:25+08:00">
+                2019-07-05
               </time>
             
 
@@ -533,8 +533,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/22/网络层/" rel="next" title>
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2019/07/05/网络层/" rel="next" title="网络层">
+                <i class="fa fa-chevron-left"></i> 网络层
               </a>
             
           </div>
@@ -543,8 +543,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/05/闭包/" rel="prev" title="闭包.md">
-                闭包.md <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/05/闭包/" rel="prev" title="闭包">
+                闭包 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -622,7 +622,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

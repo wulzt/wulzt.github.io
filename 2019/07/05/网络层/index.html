@@ -81,31 +81,31 @@
 
 <meta name="description" content="网络层 网络层关注的是如何将分组从源端沿着网络路径送达目的端。 在计算机网络领域，网络层应该向运输层提供怎样的服务，也就是说，在计算机通信中，可靠交付应当由谁来负责？ 是网络还是端系统 注：答案是端系统负责，就是IP客户端和服务端，服务端发现包发错了，就会让客户端重发，如果是网络负责的话， 就是说客户端发到任何一个路由器，路由器还要检查包错没错，错了让客户端重发，这就特别耗时和耗资源。     1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/2019/05/22/网络层/index.html">
+<meta property="og:title" content="网络层">
+<meta property="og:url" content="http://yoursite.com/2019/07/05/网络层/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="网络层 网络层关注的是如何将分组从源端沿着网络路径送达目的端。 在计算机网络领域，网络层应该向运输层提供怎样的服务，也就是说，在计算机通信中，可靠交付应当由谁来负责？ 是网络还是端系统 注：答案是端系统负责，就是IP客户端和服务端，服务端发现包发错了，就会让客户端重发，如果是网络负责的话， 就是说客户端发到任何一个路由器，路由器还要检查包错没错，错了让客户端重发，这就特别耗时和耗资源。     1">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/IP%E5%9C%B0%E5%9D%80.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/IP%E5%9C%B0%E5%9D%80%E5%92%8CMac%E5%9C%B0%E5%9D%80.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%885.28.44.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/IP%E6%95%B0%E6%8D%AE%E6%8A%A5.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%887.38.16.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%888.48.12.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%888.48.29.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%888.52.24.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.04.03.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.06.17.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.06.32.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.06.44.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%8811.15.59.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-06-07%2011.12.17.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-06-07%2016.18.17.png">
-<meta property="og:updated_time" content="2019-06-08T04:11:10.359Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/IP%E5%9C%B0%E5%9D%80.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/IP%E5%9C%B0%E5%9D%80%E5%92%8CMac%E5%9C%B0%E5%9D%80.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%885.28.44.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/IP%E6%95%B0%E6%8D%AE%E6%8A%A5.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%887.38.16.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%888.48.12.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%888.48.29.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%888.52.24.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.04.03.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.06.17.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.06.32.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.06.44.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%8811.15.59.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-06-07%2011.12.17.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-06-07%2016.18.17.png">
+<meta property="og:updated_time" content="2019-07-05T07:53:48.068Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="网络层">
 <meta name="twitter:description" content="网络层 网络层关注的是如何将分组从源端沿着网络路径送达目的端。 在计算机网络领域，网络层应该向运输层提供怎样的服务，也就是说，在计算机通信中，可靠交付应当由谁来负责？ 是网络还是端系统 注：答案是端系统负责，就是IP客户端和服务端，服务端发现包发错了，就会让客户端重发，如果是网络负责的话， 就是说客户端发到任何一个路由器，路由器还要检查包错没错，错了让客户端重发，这就特别耗时和耗资源。     1">
-<meta name="twitter:image" content="http://yoursite.com/2019/05/22/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/IP%E5%9C%B0%E5%9D%80.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/05/网络层/%E7%BD%91%E7%BB%9C%E5%B1%82/IP%E5%9C%B0%E5%9D%80.png">
 
 
 
@@ -135,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/22/网络层/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/05/网络层/">
 
 
 
 
 
-  <title> | Hexo</title>
+  <title>网络层 | Hexo</title>
   
 
 
@@ -248,7 +248,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/网络层/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/05/网络层/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -265,7 +265,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">网络层</h1>
         
 
         <div class="post-meta">
@@ -277,8 +277,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-22T17:04:13+08:00">
-                2019-05-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-05T15:49:25+08:00">
+                2019-07-05
               </time>
             
 
@@ -402,7 +402,7 @@
 <li><strong>只有到达最后一个路由器时，才试图向目的主机进行直接交付</strong>。</li>
 </ul>
 <p>分组转发算法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(1)  从数据报的首部提取目的主机的 IP 地址 D, 得出目的网络地址为 N。(2)  若网络 N 与此路由器直接相连，则把数据报直接交付目的主机 D；否则是间接交付，执行(3)。(3)  若路由表中有目的地址为 D 的特定主机路由，则把数据报传送给路由表中所指明的下一跳路由器；否则，执行(4)。(4)  若路由表中有到达网络 N 的路由，则把数据报传送给路由表指明的下一跳路由器；否则，执行(5)。(5) 若路由表中有一个默认路由，则把数据报传送给路由表中所指明的默认路由器；否则，执行(6)。(6)  报告转发分组出错。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(1)  从数据报的首部提取目的主机的 IP 地址 D, 得出目的网络地址为 N。</span><br><span class="line">(2)  若网络 N 与此路由器直接相连，则把数据报直接交付目的主机 D；否则是间接交付，执行(3)。</span><br><span class="line">(3)  若路由表中有目的地址为 D 的特定主机路由，则把数据报传送给路由表中所指明的下一跳路由器；否则，执行(4)。</span><br><span class="line">(4)  若路由表中有到达网络 N 的路由，则把数据报传送给路由表指明的下一跳路由器；否则，执行(5)。</span><br><span class="line">(5) 若路由表中有一个默认路由，则把数据报传送给路由表中所指明的默认路由器；否则，执行(6)。</span><br><span class="line">(6)  报告转发分组出错。</span><br></pre></td></tr></table></figure>
 
 <h2 id="3-子网掩码-与-子网划分-与-构造超网（无分类编址CIDR）"><a href="#3-子网掩码-与-子网划分-与-构造超网（无分类编址CIDR）" class="headerlink" title="3. 子网掩码 与 子网划分 与 构造超网（无分类编址CIDR）"></a>3. 子网掩码 与 子网划分 与 构造超网（无分类编址CIDR）</h2><p><strong>3.1 划分子网</strong><br>从两级IP变成三级IP</p>
 <ul>
@@ -423,7 +423,7 @@
 <p>但在划分子网的情况下，从 IP 地址却不能唯一地得出网络地址来，这是因为网络地址取决于那个网络所采用的子网掩码，但数据报的首部并没有提供子网掩码的信息。  </p>
 <p> 因此分组转发的算法也必须做相应的改动。  </p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(1) 从收到的分组的首部提取目的 IP 地址 D。(2) 先用各网络的子网掩码和 D 逐位相“与”，看是否和     相应的网络地址匹配。若匹配，则将分组直接交付。     否则就是间接交付，执行(3)。(3) 若路由表中有目的地址为 D 的特定主机路由，则将     分组传送给指明的下一跳路由器；否则，执行(4)。(4) 对路由表中的每一行的子网掩码和 D 逐位相“与”，     若其结果与该行的目的网络地址匹配，则将分组传送     给该行指明的下一跳路由器；否则，执行(5)。(5) 若路由表中有一个默认路由，则将分组传送给路由表     中所指明的默认路由器；否则，执行(6)。(6) 报告转发分组出错。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(1) 从收到的分组的首部提取目的 IP 地址 D。</span><br><span class="line">(2) 先用各网络的子网掩码和 D 逐位相“与”，看是否和</span><br><span class="line">     相应的网络地址匹配。若匹配，则将分组直接交付。</span><br><span class="line">     否则就是间接交付，执行(3)。</span><br><span class="line">(3) 若路由表中有目的地址为 D 的特定主机路由，则将</span><br><span class="line">     分组传送给指明的下一跳路由器；否则，执行(4)。</span><br><span class="line">(4) 对路由表中的每一行的子网掩码和 D 逐位相“与”，</span><br><span class="line">     若其结果与该行的目的网络地址匹配，则将分组传送</span><br><span class="line">     给该行指明的下一跳路由器；否则，执行(5)。</span><br><span class="line">(5) 若路由表中有一个默认路由，则将分组传送给路由表</span><br><span class="line">     中所指明的默认路由器；否则，执行(6)。</span><br><span class="line">(6) 报告转发分组出错。</span><br></pre></td></tr></table></figure>
 
 <p><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%888.52.24.png" alt></p>
 <p><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.04.03.png" alt><br><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.06.17.png" alt><br><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.06.32.png" alt><br><img src="%E7%BD%91%E7%BB%9C%E5%B1%82/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-05-22%20%E4%B8%8B%E5%8D%889.06.44.png" alt></p>
@@ -540,8 +540,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/25/运输层/" rel="prev" title>
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/05/运输层/" rel="prev" title="运输层">
+                运输层 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -619,7 +619,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
