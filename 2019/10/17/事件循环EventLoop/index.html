@@ -79,16 +79,19 @@
 
 
 
-<meta name="description" content="ㅋㅋㅋㅋㅋ">
-<meta property="og:type" content="website">
-<meta property="og:title" content="kowukowuko">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="事件循环EventLoopJavaScript 有一个主线程 main thread 和调试栈 call-stack 也称执行栈，所有的任务都会放到调用栈中等待主线程来执行 任务队列 task queue一个语句即一个taskqueue即FIFO的队列 所以task queue即承载任务的队列，而JS的eventloop会不断地过来找这个queue 问有没有task执行 同步队列 SyncTask">
+<meta property="og:type" content="article">
+<meta property="og:title" content="事件循环EventLoop">
+<meta property="og:url" content="http://yoursite.com/2019/10/17/事件循环EventLoop/index.html">
 <meta property="og:site_name" content="kowukowuko">
-<meta property="og:description" content="ㅋㅋㅋㅋㅋ">
+<meta property="og:description" content="事件循环EventLoopJavaScript 有一个主线程 main thread 和调试栈 call-stack 也称执行栈，所有的任务都会放到调用栈中等待主线程来执行 任务队列 task queue一个语句即一个taskqueue即FIFO的队列 所以task queue即承载任务的队列，而JS的eventloop会不断地过来找这个queue 问有没有task执行 同步队列 SyncTask">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/10/17/事件循环EventLoop/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AFEventLoop/IMG_4444.jpeg">
+<meta property="og:updated_time" content="2019-10-17T08:11:04.278Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kowukowuko">
-<meta name="twitter:description" content="ㅋㅋㅋㅋㅋ">
+<meta name="twitter:title" content="事件循环EventLoop">
+<meta name="twitter:description" content="事件循环EventLoopJavaScript 有一个主线程 main thread 和调试栈 call-stack 也称执行栈，所有的任务都会放到调用栈中等待主线程来执行 任务队列 task queue一个语句即一个taskqueue即FIFO的队列 所以task queue即承载任务的队列，而JS的eventloop会不断地过来找这个queue 问有没有task执行 同步队列 SyncTask">
+<meta name="twitter:image" content="http://yoursite.com/2019/10/17/事件循环EventLoop/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AFEventLoop/IMG_4444.jpeg">
 
 
 
@@ -118,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/17/事件循环EventLoop/">
 
 
 
 
 
-  <title>kowukowuko</title>
+  <title>事件循环EventLoop | kowukowuko</title>
   
 
 
@@ -143,8 +146,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -255,9 +257,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -287,9 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/17/事件循环EventLoop/" itemprop="url">事件循环EventLoop</a></h1>
+          <h1 class="post-title" itemprop="name headline">事件循环EventLoop</h1>
         
 
         <div class="post-meta">
@@ -339,20 +339,34 @@
       
 
       
-        
-          
-          事件循环EventLoopJavaScript 有一个主线程 main thread 和调试栈 call-stack 也称执行栈，所有的任务都会放到调用栈中等待主线程来执行
-任务队列 task queue一个语句即一个taskqueue即FIFO的队列
-所以task queue即承载任务的队列，而J
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/10/17/事件循环EventLoop/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <h1 id="事件循环EventLoop"><a href="#事件循环EventLoop" class="headerlink" title="事件循环EventLoop"></a>事件循环EventLoop</h1><p>JavaScript 有一个主线程 <code>main thread</code> 和调试栈 <code>call-stack</code> 也称执行栈，所有的任务都会放到调用栈中等待主线程来执行</p>
+<h2 id="任务队列-task-queue"><a href="#任务队列-task-queue" class="headerlink" title="任务队列 task queue"></a>任务队列 <code>task queue</code></h2><p>一个语句即一个<code>task</code><br><code>queue</code>即<code>FIFO</code>的队列</p>
+<p>所以<code>task queue</code>即承载任务的队列，而JS的<code>eventloop</code>会不断地过来找这个<code>queue</code> 问有没有<code>task</code>执行</p>
+<h2 id="同步队列-SyncTask-异步任务-AsyncTask"><a href="#同步队列-SyncTask-异步任务-AsyncTask" class="headerlink" title="同步队列 SyncTask 异步任务 AsyncTask"></a>同步队列 <code>SyncTask</code> 异步任务 <code>AsyncTask</code></h2><ul>
+<li>主线程从上到下执行所有代码</li>
+<li>同步任务直接进入主线程被执行，<strong>异步任务则进入到 Event Table 并注册相对应的回调函数</strong></li>
+<li>异步任务完成后，<code>Event Table</code>会将这个回调函数移入<code>Event Queue</code></li>
+<li>主线任务执行完了以后会从<code>Event Queue</code>中读取任务，进入到主线程去执行</li>
+<li>循环如上</li>
+</ul>
+<h2 id="宏任务-MacroTask-微任务-MicroTask"><a href="#宏任务-MacroTask-微任务-MicroTask" class="headerlink" title="宏任务 MacroTask 微任务 MicroTask"></a>宏任务 <code>MacroTask</code> 微任务 <code>MicroTask</code></h2><p>宏任务： 所有同步任务代码，<code>setTimeout</code>， <code>setInterval</code>， <code>I/O</code>，<code>UI Rendering</code> 等<br>微任务： <code>Process.nextTick</code>， <code>Promise.then  catch  finally</code>，<code>MutationObserver</code></p>
+<h2 id="setTimeout-setInterval"><a href="#setTimeout-setInterval" class="headerlink" title="setTimeout  setInterval"></a>setTimeout  setInterval</h2><p>setTimeout 问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">letstartTime=newDate().getTime()</span><br><span class="line">console.log(startTime)</span><br><span class="line"></span><br><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">console.log(`开始执行回调的相隔时差：$&#123;newDate().getTime()-startTime&#125;`)</span><br><span class="line">&#125;,1000)</span><br><span class="line"></span><br><span class="line">for(leti=0;i&lt;400000;i++)&#123;</span><br><span class="line">console.log(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出： 开始执行回调的相隔时差：3793</p>
+<p>分析： </p>
+<ul>
+<li>遇到<code>setTimeout</code>是个异步任务，就注册相应的回调函数<br>1s后将<code>console.log(&#39;***&#39;)</code>放到<code>Task Queue</code>中</li>
+<li>遇到40w个for循环的task，1s后未执行完毕</li>
+<li>等所有立即执行栈中的task执行完，再回头看taskqueue中的任务</li>
+</ul>
+<blockquote>
+<p>一次事件循环回来后，开始去执行<code>TaskQueue</code>中的task，但这里的task有<strong>优先级</strong>，优先执行<code>MicroTask Queue</code>中的Task，执行完再执行<code>MacroTask</code>中的task  </p>
+</blockquote>
+<h2 id="Node环境下的EventLoop"><a href="#Node环境下的EventLoop" class="headerlink" title="Node环境下的EventLoop"></a>Node环境下的EventLoop</h2><p>基于libuv实现<br>略</p>
+<h2 id="浏览器与node的EventLoop差异"><a href="#浏览器与node的EventLoop差异" class="headerlink" title="浏览器与node的EventLoop差异"></a>浏览器与node的EventLoop差异</h2><p>浏览器环境下的<code>MicroTask</code>会在每个<code>MacroTask</code>执行完后执行<br>NodeJs中<code>MicroTask</code>会在事件循环的各个阶段之间执行</p>
+<p><img src="%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AFEventLoop/IMG_4444.jpeg" alt></p>
+
       
     </div>
     
@@ -369,140 +383,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/05/闭包/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LZT">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="kowukowuko">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/05/闭包/" itemprop="url">闭包</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-05T15:49:25+08:00">
-                2019-07-05
-              </time>
+              <a href="/2019/07/05/闭包/" rel="next" title="闭包">
+                <i class="fa fa-chevron-left"></i> 闭包
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-          闭包闭包是指其所在执行上下文已经出栈，但仍访问了其所在执行上下文变量对象的函数。
-JavaScript 拥有自动的垃圾回收机制，当一个值失去引用的时候，垃圾回收机制会根据特殊的算法找到它并将其回收。
-函数的执行上下文在出栈后，其变量对象会失去引用等待被回收，而闭包的存在会阻止这一过程，因为闭包的作用
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/05/闭包/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -512,267 +414,11 @@ JavaScript 拥有自动的垃圾回收机制，当一个值失去引用的时候
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/05/运输层/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LZT">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="kowukowuko">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/05/运输层/" itemprop="url">运输层</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-05T15:49:25+08:00">
-                2019-07-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          运输层1. 运输层协议概述1.1 概述运输层为相互通信的应用进程提供了逻辑通信
-
-两个主机进行通信实际上就是两个主机中的应用进程互相通信。 
-应用进程之间的通信又称为端到端的通信。 
-运输层的一个很重要的功能就是复用和分用。应用层不同进程的报文通过不同的端口向下交到运输层，再往下就共用网络层提供的服
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/05/运输层/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/05/网络层/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LZT">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="kowukowuko">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/05/网络层/" itemprop="url">网络层</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-05T15:49:25+08:00">
-                2019-07-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          网络层
-网络层关注的是如何将分组从源端沿着网络路径送达目的端。 在计算机网络领域，网络层应该向运输层提供怎样的服务，也就是说，在计算机通信中，可靠交付应当由谁来负责？ 是网络还是端系统 注：答案是端系统负责，就是IP客户端和服务端，服务端发现包发错了，就会让客户端重发，如果是网络负责的话， 就是说客
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/05/网络层/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -780,6 +426,10 @@ JavaScript 拥有自动的垃圾回收机制，当一个值失去引用的时候
 
 
           
+
+  
+
+
 
         </div>
         
@@ -800,8 +450,17 @@ JavaScript 拥有自动的垃圾回收机制，当一个值失去引用的时候
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -843,6 +502,22 @@ JavaScript 拥有自动的垃圾回收机制，当一个值失去引用的时候
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#事件循环EventLoop"><span class="nav-number">1.</span> <span class="nav-text">事件循环EventLoop</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#任务队列-task-queue"><span class="nav-number">1.1.</span> <span class="nav-text">任务队列 task queue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步队列-SyncTask-异步任务-AsyncTask"><span class="nav-number">1.2.</span> <span class="nav-text">同步队列 SyncTask 异步任务 AsyncTask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#宏任务-MacroTask-微任务-MicroTask"><span class="nav-number">1.3.</span> <span class="nav-text">宏任务 MacroTask 微任务 MicroTask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setTimeout-setInterval"><span class="nav-number">1.4.</span> <span class="nav-text">setTimeout  setInterval</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node环境下的EventLoop"><span class="nav-number">1.5.</span> <span class="nav-text">Node环境下的EventLoop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器与node的EventLoop差异"><span class="nav-number">1.6.</span> <span class="nav-text">浏览器与node的EventLoop差异</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -970,6 +645,10 @@ JavaScript 拥有自动的垃圾回收机制，当一个值失去引用的时候
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
