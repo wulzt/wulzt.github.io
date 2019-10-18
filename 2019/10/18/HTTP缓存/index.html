@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="事件循环EventLoopJavaScript 有一个主线程 main thread 和调试栈 call-stack 也称执行栈，所有的任务都会放到调用栈中等待主线程来执行 任务队列 task queue一个语句即一个taskqueue即FIFO的队列 所以task queue即承载任务的队列，而JS的eventloop会不断地过来找这个queue 问有没有task执行 同步队列 SyncTask">
+<meta name="description" content="HTTP缓存web缓存可以大致分为： 数据库缓存，服务器缓存（代理服务器缓存、CDN缓存），浏览器缓存 浏览器缓存也包含很多内容： HTTP缓存，indexDB，cookie，localstorage等等。 这里讨论HTTP缓存相关 为什么需要缓存？1.冗余的数据传输 2.带宽瓶颈 3.瞬间拥堵 4.距离时延 术语  缓存命中率：从缓存中得到数据的请求数与所有请求数的比率。理想状态是越高越好。 过">
 <meta property="og:type" content="article">
 <meta property="og:title" content="事件循环EventLoop">
-<meta property="og:url" content="http://yoursite.com/2019/10/17/事件循环EventLoop/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/10/18/HTTP缓存/index.html">
 <meta property="og:site_name" content="kowukowuko">
-<meta property="og:description" content="事件循环EventLoopJavaScript 有一个主线程 main thread 和调试栈 call-stack 也称执行栈，所有的任务都会放到调用栈中等待主线程来执行 任务队列 task queue一个语句即一个taskqueue即FIFO的队列 所以task queue即承载任务的队列，而JS的eventloop会不断地过来找这个queue 问有没有task执行 同步队列 SyncTask">
+<meta property="og:description" content="HTTP缓存web缓存可以大致分为： 数据库缓存，服务器缓存（代理服务器缓存、CDN缓存），浏览器缓存 浏览器缓存也包含很多内容： HTTP缓存，indexDB，cookie，localstorage等等。 这里讨论HTTP缓存相关 为什么需要缓存？1.冗余的数据传输 2.带宽瓶颈 3.瞬间拥堵 4.距离时延 术语  缓存命中率：从缓存中得到数据的请求数与所有请求数的比率。理想状态是越高越好。 过">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/10/17/事件循环EventLoop/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AFEventLoop/IMG_4444.jpeg">
-<meta property="og:updated_time" content="2019-10-17T08:11:04.278Z">
+<meta property="og:image" content="http://yoursite.com/2019/10/18/HTTP缓存/HTTP%E7%BC%93%E5%AD%98/v2-d322e8342ee00d4c21b46f5cc709d61a_hd.jpg">
+<meta property="og:updated_time" content="2019-10-18T12:42:24.230Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="事件循环EventLoop">
-<meta name="twitter:description" content="事件循环EventLoopJavaScript 有一个主线程 main thread 和调试栈 call-stack 也称执行栈，所有的任务都会放到调用栈中等待主线程来执行 任务队列 task queue一个语句即一个taskqueue即FIFO的队列 所以task queue即承载任务的队列，而JS的eventloop会不断地过来找这个queue 问有没有task执行 同步队列 SyncTask">
-<meta name="twitter:image" content="http://yoursite.com/2019/10/17/事件循环EventLoop/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AFEventLoop/IMG_4444.jpeg">
+<meta name="twitter:description" content="HTTP缓存web缓存可以大致分为： 数据库缓存，服务器缓存（代理服务器缓存、CDN缓存），浏览器缓存 浏览器缓存也包含很多内容： HTTP缓存，indexDB，cookie，localstorage等等。 这里讨论HTTP缓存相关 为什么需要缓存？1.冗余的数据传输 2.带宽瓶颈 3.瞬间拥堵 4.距离时延 术语  缓存命中率：从缓存中得到数据的请求数与所有请求数的比率。理想状态是越高越好。 过">
+<meta name="twitter:image" content="http://yoursite.com/2019/10/18/HTTP缓存/HTTP%E7%BC%93%E5%AD%98/v2-d322e8342ee00d4c21b46f5cc709d61a_hd.jpg">
 
 
 
@@ -121,7 +121,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/10/17/事件循环EventLoop/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/18/HTTP缓存/">
 
 
 
@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/17/事件循环EventLoop/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/18/HTTP缓存/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LZT">
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-17T16:06:42+08:00">
-                2019-10-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-18T20:42:00+08:00">
+                2019-10-18
               </time>
             
 
@@ -339,33 +339,65 @@
       
 
       
-        <h1 id="事件循环EventLoop"><a href="#事件循环EventLoop" class="headerlink" title="事件循环EventLoop"></a>事件循环EventLoop</h1><p>JavaScript 有一个主线程 <code>main thread</code> 和调试栈 <code>call-stack</code> 也称执行栈，所有的任务都会放到调用栈中等待主线程来执行</p>
-<h2 id="任务队列-task-queue"><a href="#任务队列-task-queue" class="headerlink" title="任务队列 task queue"></a>任务队列 <code>task queue</code></h2><p>一个语句即一个<code>task</code><br><code>queue</code>即<code>FIFO</code>的队列</p>
-<p>所以<code>task queue</code>即承载任务的队列，而JS的<code>eventloop</code>会不断地过来找这个<code>queue</code> 问有没有<code>task</code>执行</p>
-<h2 id="同步队列-SyncTask-异步任务-AsyncTask"><a href="#同步队列-SyncTask-异步任务-AsyncTask" class="headerlink" title="同步队列 SyncTask 异步任务 AsyncTask"></a>同步队列 <code>SyncTask</code> 异步任务 <code>AsyncTask</code></h2><ul>
-<li>主线程从上到下执行所有代码</li>
-<li>同步任务直接进入主线程被执行，<strong>异步任务则进入到 Event Table 并注册相对应的回调函数</strong></li>
-<li>异步任务完成后，<code>Event Table</code>会将这个回调函数移入<code>Event Queue</code></li>
-<li>主线任务执行完了以后会从<code>Event Queue</code>中读取任务，进入到主线程去执行</li>
-<li>循环如上</li>
-</ul>
-<h2 id="宏任务-MacroTask-微任务-MicroTask"><a href="#宏任务-MacroTask-微任务-MicroTask" class="headerlink" title="宏任务 MacroTask 微任务 MicroTask"></a>宏任务 <code>MacroTask</code> 微任务 <code>MicroTask</code></h2><p>宏任务： 所有同步任务代码，<code>setTimeout</code>， <code>setInterval</code>， <code>I/O</code>，<code>UI Rendering</code> 等<br>微任务： <code>Process.nextTick</code>， <code>Promise.then  catch  finally</code>，<code>MutationObserver</code></p>
-<h2 id="setTimeout-setInterval"><a href="#setTimeout-setInterval" class="headerlink" title="setTimeout  setInterval"></a>setTimeout  setInterval</h2><p>setTimeout 问题</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">letstartTime=newDate().getTime()</span><br><span class="line">console.log(startTime)</span><br><span class="line"></span><br><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">console.log(`开始执行回调的相隔时差：$&#123;newDate().getTime()-startTime&#125;`)</span><br><span class="line">&#125;,1000)</span><br><span class="line"></span><br><span class="line">for(leti=0;i&lt;400000;i++)&#123;</span><br><span class="line">console.log(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出： 开始执行回调的相隔时差：3793</p>
-<p>分析： </p>
+        <h1 id="HTTP缓存"><a href="#HTTP缓存" class="headerlink" title="HTTP缓存"></a>HTTP缓存</h1><p>web缓存可以大致分为： 数据库缓存，服务器缓存（代理服务器缓存、CDN缓存），浏览器缓存</p>
+<p>浏览器缓存也包含很多内容： HTTP缓存，indexDB，cookie，localstorage等等。</p>
+<p>这里讨论HTTP缓存相关</p>
+<p>为什么需要缓存？<br>1.冗余的数据传输 2.带宽瓶颈 3.瞬间拥堵 4.距离时延</p>
+<p>术语</p>
 <ul>
-<li>遇到<code>setTimeout</code>是个异步任务，就注册相应的回调函数<br>1s后将<code>console.log(&#39;***&#39;)</code>放到<code>Task Queue</code>中</li>
-<li>遇到40w个for循环的task，1s后未执行完毕</li>
-<li>等所有立即执行栈中的task执行完，再回头看taskqueue中的任务</li>
+<li>缓存命中率：从缓存中得到数据的请求数与所有请求数的比率。理想状态是越高越好。</li>
+<li>过期内容：超过设置的有效时间，被标记为“陈旧”的内容。通常过期内容不能用于回复客户端的请求，必须重新向源服务器请求新的内容或者验证缓存的内容是否仍然准备。</li>
+<li>验证：验证缓存中的过期内容是否仍然有效，验证通过的话刷新过期时间。</li>
+<li>失效：失效就是把内容从缓存中移除。当内容发生改变时就必须移除失效的内容。</li>
+</ul>
+<p>浏览器缓存主要是HTTP协议定义的缓存机制。HTML meta 标签，例如<br><code>&lt;META HTTP-EQUIV=”Pragma” CONTENT=”no-store”&gt;</code></p>
+<p>含义是让浏览器不缓存当前页面。但是代理服务器不解析 HTML 内容，一般应用广泛的是用 HTTP 头信息控制缓存。</p>
+<h2 id="HTTP头信息控制缓存"><a href="#HTTP头信息控制缓存" class="headerlink" title="HTTP头信息控制缓存"></a>HTTP头信息控制缓存</h2><p>大致分两种：<br>强缓存： 如果命中缓存不需要和服务器端发生交互<br>协商缓存： 不管命中与否都和服务器端发生交互</p>
+<p>匹配流程（已有缓存情况下）</p>
+<p><img src="HTTP%E7%BC%93%E5%AD%98/v2-d322e8342ee00d4c21b46f5cc709d61a_hd.jpg" alt></p>
+<ul>
+<li>强缓存<br>响应头中 <code>Expires</code> / <code>Cache-Control</code>  表明规则<br>在没禁用缓存且没超过有效时间的情况下，再次访问这个资源就命中了缓存  200 (from disk cache)</li>
+</ul>
+<p><code>Cache-Control</code>字段： </p>
+<p><code>max-age</code>、<code>s-maxage</code>(仅适用共享缓存)、<code>public</code>、<code>private</code>、<code>no-cache</code>、<code>no-store</code></p>
+<ul>
+<li><strong>max-age</strong>指定一个时间长度，在这个时间段内缓存是有效的，单位是s</li>
+<li><strong>s-maxage</strong>同 max-age，覆盖 max-age、Expires，但仅适用于共享缓存，在私有缓存中被忽略。</li>
+<li><strong>public</strong>表明响应可以被任何对象（发送请求的客户端、代理服务器等等）缓存。</li>
+<li><strong>private</strong>表明响应只能被单个用户（可能是操作系统用户、浏览器用户）缓存，是非共享的，不能被代理服务器缓存。</li>
+<li><strong>no-cache</strong>强制所有缓存了该响应的用户，在使用已缓存的数据前，发送带验证器的请求到服务器。不是字面意思上的不缓存。</li>
+<li><strong>no-store</strong>禁止缓存，每次请求都要向服务器重新获取数据。</li>
+</ul>
+<ul>
+<li>协商缓存<br>缓存的资源到期了并不意味资源内容有改变<br>客户端和服务器端通过某种验证机制验证当前请求资源是否可用缓存</li>
+</ul>
+<p>浏览器第一次请求数据会把数据和响应头部的缓存标识存储起来，再次请求会带上存储的头部字段，服务器端验证是否可用<br>可： 304 Not Modified    不可： 200</p>
+<p>——分割线——</p>
+<ul>
+<li><input disabled type="checkbox"> <p><code>Last-Modidfied</code>/<code>If-Modified-Since</code><br><code>Last-Modidfied</code>：服务器资源的最后修改时间，响应头带上这个标识，第一次请求后浏览器记下这个时间，再次请求，头部带<code>If-Modified-Since</code>即为之前记录的时间</p>
+</li>
+<li><input disabled type="checkbox"> <p><code>Etag</code>/<code>If-None-Match</code><br>由服务器端上生成的一段hash字符串，第一次请求的响应头带上<code>Etag:abcd</code> ，之后的请求头带<code>If-None-Match:abcd</code>，服务器检查Etag</p>
+</li>
 </ul>
 <blockquote>
-<p>一次事件循环回来后，开始去执行<code>TaskQueue</code>中的task，但这里的task有<strong>优先级</strong>，优先执行<code>MicroTask Queue</code>中的Task，执行完再执行<code>MacroTask</code>中的task  </p>
+<p>Expires vs max-age<br>都用于控制缓存的生命周期<br>Expires是过期的具体时间，例： <code>Sun, 21 Mar 2020 08:52:13 GWT</code><br>max-age 是生命时长秒数</p>
 </blockquote>
-<h2 id="Node环境下的EventLoop"><a href="#Node环境下的EventLoop" class="headerlink" title="Node环境下的EventLoop"></a>Node环境下的EventLoop</h2><p>基于libuv实现<br>略</p>
-<h2 id="浏览器与node的EventLoop差异"><a href="#浏览器与node的EventLoop差异" class="headerlink" title="浏览器与node的EventLoop差异"></a>浏览器与node的EventLoop差异</h2><p>浏览器环境下的<code>MicroTask</code>会在每个<code>MacroTask</code>执行完后执行<br>NodeJs中<code>MicroTask</code>会在事件循环的各个阶段之间执行</p>
-<p><img src="%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AFEventLoop/IMG_4444.jpeg" alt></p>
+<blockquote>
+<p>Etag vs Last-Modified<br>都用于对资源的验证<br>Etag 强验证，期待资源字节级别的一致<br>Last-Modified 弱验证，只要资源主要内容相同（允许例页脚广告不同）</p>
+</blockquote>
+<h3 id="实际运用"><a href="#实际运用" class="headerlink" title="实际运用"></a>实际运用</h3><ul>
+<li><p>考虑缓存的内容<br>css样式<br>js文件<br>logo、图标<br>html文件<br>可以下载的内容</p>
+<ul>
+<li><p>不常改变的文件<br>max-age设置较大值  max-age=31536000</p>
+</li>
+<li><p>常要变动的文件<br>Cache-Control: no-cache/max-age=0<br>比如入口index.html文件、文件内容改变但名称不变的资源。选择 ETag或 Last-Modified 来做验证，在使用缓存资源之前一定会去服务器端做验证，命中缓存时会比第一种情况慢一点点，毕竟还要发请求进行通信。</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>不应该被缓存<br>业务敏感的GET内容</li>
+</ul>
 
       
     </div>
@@ -390,8 +422,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/12/模块化/" rel="next" title="模块化">
-                <i class="fa fa-chevron-left"></i> 模块化
+              <a href="/2019/10/17/事件循环EventLoop/" rel="next" title="事件循环EventLoop">
+                <i class="fa fa-chevron-left"></i> 事件循环EventLoop
               </a>
             
           </div>
@@ -399,10 +431,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/10/18/HTTP缓存/" rel="prev" title="事件循环EventLoop">
-                事件循环EventLoop <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -516,7 +544,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#事件循环EventLoop"><span class="nav-number">1.</span> <span class="nav-text">事件循环EventLoop</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#任务队列-task-queue"><span class="nav-number">1.1.</span> <span class="nav-text">任务队列 task queue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步队列-SyncTask-异步任务-AsyncTask"><span class="nav-number">1.2.</span> <span class="nav-text">同步队列 SyncTask 异步任务 AsyncTask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#宏任务-MacroTask-微任务-MicroTask"><span class="nav-number">1.3.</span> <span class="nav-text">宏任务 MacroTask 微任务 MicroTask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setTimeout-setInterval"><span class="nav-number">1.4.</span> <span class="nav-text">setTimeout  setInterval</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node环境下的EventLoop"><span class="nav-number">1.5.</span> <span class="nav-text">Node环境下的EventLoop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器与node的EventLoop差异"><span class="nav-number">1.6.</span> <span class="nav-text">浏览器与node的EventLoop差异</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP缓存"><span class="nav-number">1.</span> <span class="nav-text">HTTP缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP头信息控制缓存"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP头信息控制缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实际运用"><span class="nav-number">1.1.1.</span> <span class="nav-text">实际运用</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
