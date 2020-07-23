@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="CSS  盒子模型归宗于box-sizing的属性：border-box、content-boxIE盒子模型：border-box，width指的是content+padding+border标准盒子模型：content-box，width和height只包含content内容   1px问题transform: scaleY(0.5);   CSS3新特性    word-wrap  文字换行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS">
+<meta property="og:url" content="http://yoursite.com/2020/07/24/CSS/index.html">
+<meta property="og:site_name" content="kowukowuko">
+<meta property="og:description" content="CSS  盒子模型归宗于box-sizing的属性：border-box、content-boxIE盒子模型：border-box，width指的是content+padding+border标准盒子模型：content-box，width和height只包含content内容   1px问题transform: scaleY(0.5);   CSS3新特性    word-wrap  文字换行">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-07-23T17:23:36.401Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS">
+<meta name="twitter:description" content="CSS  盒子模型归宗于box-sizing的属性：border-box、content-boxIE盒子模型：border-box，width指的是content+padding+border标准盒子模型：content-box，width和height只包含content内容   1px问题transform: scaleY(0.5);   CSS3新特性    word-wrap  文字换行">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'T8XBOJJNFX',
+      apiKey: '59ff9e3b216c019eeb2f6c073cef5a49',
+      indexName: 'wulzt',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/07/24/CSS/">
+
+
+
+
+
+  <title>CSS | kowukowuko</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">kowukowuko</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">move now</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/24/CSS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LZT">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kowukowuko">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CSS</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-24T00:01:42+08:00">
+                2020-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h1><ul>
+<li><input checked disabled type="checkbox"> <p>盒子模型<br>归宗于box-sizing的属性：border-box、content-box<br>IE盒子模型：border-box，width指的是content+padding+border<br>标准盒子模型：content-box，width和height只包含content内容</p>
+</li>
+<li><input checked disabled type="checkbox"> <p>1px问题<br>transform: scaleY(0.5);</p>
+</li>
+<li><input disabled type="checkbox"> <p>CSS3新特性</p>
+</li>
+</ul>
+<ul>
+<li>word-wrap  文字换行</li>
+<li>text-overflow 超出指定容器边界时如何显示</li>
+<li>text-decoration  文字渲染</li>
+<li>text-shadow  文字阴影</li>
+<li>gradient 渐变</li>
+<li>transform 拉伸、压缩、旋转、偏移</li>
+<li>transition 过渡效果</li>
+<li>animation  动画</li>
+</ul>
+<ul>
+<li><input disabled type="checkbox"> transition和animation区别</li>
+</ul>
+<ol>
+<li>触发条件：transition需要由事件触发(hover)，animation不需要</li>
+<li>循环： animation可以设定循环次数</li>
+<li>精确性： animation可以设定每一帧的样式和事件，transition只能设定头尾</li>
+<li>与js的交互： 用js灵活设定动画属性，用transition</li>
+</ol>
+<ul>
+<li><input checked disabled type="checkbox"> 不定高的div居中</li>
+</ul>
+<ol>
+<li>position: absolute; top: 0; bottom: 0; margin: auto;</li>
+<li>position: absolute; top: 50%; transform: trnslateY(-50%);</li>
+<li>display: flex; align-items: center;</li>
+</ol>
+<ul>
+<li><input checked disabled type="checkbox"> 浮动<br>浮动元素会从普通文档流中脱离，但浮动元素影响的不仅是自己，它会影响周围元素对其进行环绕；不管一个元素是行内元素还是块级元素，如果被设置了浮动，那浮动元素会生成一个块级框，可以设置它的宽度和高度。<br>清除浮动（解决父元素高度塌陷）：</li>
+</ul>
+<ul>
+<li>给父元素定义高度</li>
+<li>让父元素也浮动</li>
+<li>父元素display: table;</li>
+<li>父元素设置overflow: hidden;</li>
+<li>clearfix：使用内容生成的方式清除浮动<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.cleafix::after&#123;</span><br><span class="line">	content: ‘’;</span><br><span class="line">	display: block;</span><br><span class="line">	clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><input checked disabled type="checkbox"> css选择器分类<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">基本的：</span><br><span class="line">	1. id选择器</span><br><span class="line">	2. 类选择器</span><br><span class="line">	3. 标签选择器</span><br><span class="line">	4. 全局选择器 *</span><br><span class="line">复杂的：</span><br><span class="line">	1. 组合选择器</span><br><span class="line">	2. 后代选择器</span><br><span class="line">	3. 群组选择器</span><br><span class="line">	4. 继承选择器</span><br><span class="line">	5. 伪类选择器（链接样式 :hover :active :link :visited）(:first-child :last-of-type :nth-of-type)</span><br><span class="line">	6. 子选择器（div&gt;p）</span><br><span class="line">	7. css相邻兄弟选择器（h1+p）</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>优先级：!important &gt; 行内样式 &gt; id &gt; class &gt; 标签 &gt; 通配符* &gt; 继承 &gt; 浏览器默认属性</p>
+<ul>
+<li><input checked disabled type="checkbox"> <p>行内元素和块元素<br>行内元素 span img input a i : 没有宽度和高度<br>块级元素  div p ul li h1-h6: 独占一行</p>
+</li>
+<li><input checked disabled type="checkbox"> <p>画一个三角形</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">width: 0;</span><br><span class="line">height: 0;</span><br><span class="line">border: solid 50px transparent;</span><br><span class="line">border-top: solid 50px black;</span><br></pre></td></tr></table></figure>
+</li>
+<li><input checked disabled type="checkbox"> <p>使元素消失的方法<br>display: none; visibility: hidden; opacity: 0; z-index: -1;</p>
+</li>
+<li><input checked disabled type="checkbox"> <p>为什么css放顶部而js写末尾</p>
+</li>
+</ul>
+<ul>
+<li>浏览器预加载css后，可以不必等待html加载完毕就可以渲染页面了</li>
+<li>js写在尾部，主要是因为js主要扮演事件处理的能力，一方面很多操作是在页面渲染后才执行；另一方面可以节省加载时间，使页面能更快加载，提高用户的良好体验</li>
+</ul>
+<h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><ul>
+<li><input checked disabled type="checkbox"> <p>flex弹性布局<br>可以简单地使一个元素居中，栅格化系统布局<br>设为flex布局后，子元素的float、clear和vertical-align属性将失效<br>水平的主轴 main axis<br>垂直的交叉轴 cross axis</p>
+</li>
+<li><input disabled type="checkbox"> <p>三栏布局</p>
+</li>
+</ul>
+<ul>
+<li><input checked disabled type="checkbox"> 左边定宽右边自适应</li>
+</ul>
+<ul>
+<li>左浮动，右边宽度设置100%。 .left{float: left} .right{width: 100%;}</li>
+<li>父容器设置display: flex; right部分设置flex: 1</li>
+</ul>
+<ul>
+<li><input checked disabled type="checkbox"> <p>水平居中<br>行内元素居中 父元素text-align: center;<br>块状元素居中 宽度一定用margin: auto; 宽度不一定，块级变行内，父上用text-align</p>
+</li>
+<li><input checked disabled type="checkbox"> <p>BFC<br>块级格式化上下文，它是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素<br>哪些元素会生成BFC：</p>
+</li>
+</ul>
+<ul>
+<li>根元素</li>
+<li>float属性不为none</li>
+<li>position 为absolute或fixed</li>
+<li>display为inline-block，table-cell，table-caption，flex，inline-flex</li>
+<li>overflow不为visible</li>
+</ul>
+<ul>
+<li><input checked disabled type="checkbox"> 浮动<br>float<br>浮动会造成父元素高度塌陷问题，一个块级元素如果没有设置height，其height由子元素撑开，对子元素使用了浮动后，子元素会脱离文档流，也就是说父元素没有内容可以撑开其高度，这样父元素的height会被忽略，这就是所谓高度塌陷</li>
+</ul>
+<ul>
+<li>如何清除<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1. 给父元素定高度</span><br><span class="line">2. 让父元素也浮动</span><br><span class="line">3. 父元素display: table;</span><br><span class="line">4. 父元素overflow: hidden;</span><br><span class="line">5. clearfix：使用内容生成的方式清除浮动</span><br><span class="line">	.clearfix:after&#123;  //:after选择器向选定的元素之后插入内容</span><br><span class="line">		content: &apos;&apos;,  //生成内容为空</span><br><span class="line">		display: block;  //块级元素显示</span><br><span class="line">		clear: both;  //清除前面元素</span><br><span class="line">	&#125;</span><br><span class="line">	不破坏文档流，没有副作用</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><input checked disabled type="checkbox"> 伪类和伪元素<br>伪类： 为了通过选择器找到那些不存在DOM树中的信息以及不能被常规CSS选择器获取到的信息<br><code>:link</code> <code>:hover</code> <code>:focus</code><br><code>:first-child</code> <code>:first-of-type</code><br>伪元素： 用于创建一些不在文档树中的元素，并为其添加样式<br><code>::before</code> <code>::after</code></li>
+</ul>
+<ul>
+<li><input disabled type="checkbox"> 两列等高布局</li>
+</ul>
+<ol>
+<li><p>使用负margin-bottom和正padding-bottom对冲</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.parent&#123;</span><br><span class="line">	overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line">.child&#123;</span><br><span class="line">	margin-bottom: 99999px;</span><br><span class="line">	padding-bottom: -99999px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>flex</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.parent&#123;</span><br><span class="line">	display: flex;</span><br><span class="line">&#125;</span><br><span class="line">.child&#123;</span><br><span class="line">	flex: 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li><input disabled type="checkbox"> 块级元素、行内元素<br>块级元素： div,p,h1-h6<br>行内元素： a,span,strong,img,input</li>
+</ul>
+<p>行内元素设置float或position: absolute<br>会变成块级元素（display: block)，可以设置宽高</p>
+<p>同时设置float和absolute，会使float失效</p>
+<p>img、input等行内元素可以设置宽高的原因：<br>属于替换元素，<strong>替换元素 : 浏览器根据元素的标签和属性，来决定元素的具体显示内容</strong>。</p>
+<p>不可替换元素： 内容直接表现给用户</p>
+<p>inline元素默认是基线对齐</p>
+<ul>
+<li><input disabled type="checkbox"> flex<br><a href="bear://x-callback-url/open-note?id=85312179-6495-4A46-A95F-B637C2453518-5423-0000DC90C95F879B" target="_blank" rel="noopener">flex布局</a></li>
+</ul>
+<p>#前端面试</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/05/flex布局/" rel="next" title="flex布局">
+                <i class="fa fa-chevron-left"></i> flex布局
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/24/JS/" rel="prev" title="JS">
+                JS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">LZT</p>
+              <p class="site-description motion-element" itemprop="description">ㅋㅋㅋㅋㅋ</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS"><span class="nav-number">1.</span> <span class="nav-text">CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#布局"><span class="nav-number">1.1.</span> <span class="nav-text">布局</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LZT</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

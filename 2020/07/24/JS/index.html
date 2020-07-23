@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JS  前端事件流捕获、处理、冒泡ie是冒泡型，只有冒泡addEventListener，最后布尔值是true，表示在捕获阶段调用事件处理程序，false表明在冒泡阶段调用事件处理程序   不支持冒泡事件的有 鼠标事件： mouseleave  mouseenter焦点事件： blur  focusUI事件： scroll  resize        addEventListener通常我们使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS">
+<meta property="og:url" content="http://yoursite.com/2020/07/24/JS/index.html">
+<meta property="og:site_name" content="kowukowuko">
+<meta property="og:description" content="JS  前端事件流捕获、处理、冒泡ie是冒泡型，只有冒泡addEventListener，最后布尔值是true，表示在捕获阶段调用事件处理程序，false表明在冒泡阶段调用事件处理程序   不支持冒泡事件的有 鼠标事件： mouseleave  mouseenter焦点事件： blur  focusUI事件： scroll  resize        addEventListener通常我们使用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/07/24/JS/“”">
+<meta property="og:image" content="http://yoursite.com/2020/07/24/JS/167c0772297e4ff8.png">
+<meta property="og:updated_time" content="2020-07-23T17:37:33.478Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS">
+<meta name="twitter:description" content="JS  前端事件流捕获、处理、冒泡ie是冒泡型，只有冒泡addEventListener，最后布尔值是true，表示在捕获阶段调用事件处理程序，false表明在冒泡阶段调用事件处理程序   不支持冒泡事件的有 鼠标事件： mouseleave  mouseenter焦点事件： blur  focusUI事件： scroll  resize        addEventListener通常我们使用">
+<meta name="twitter:image" content="http://yoursite.com/2020/07/24/JS/“”">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'T8XBOJJNFX',
+      apiKey: '59ff9e3b216c019eeb2f6c073cef5a49',
+      indexName: 'wulzt',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/07/24/JS/">
+
+
+
+
+
+  <title>JS | kowukowuko</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">kowukowuko</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">move now</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/24/JS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LZT">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kowukowuko">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-24T00:02:42+08:00">
+                2020-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h1><ul>
+<li><input checked disabled type="checkbox"> 前端事件流<br>捕获、处理、冒泡<br>ie是冒泡型，只有冒泡<br>addEventListener，最后布尔值是true，表示在捕获阶段调用事件处理程序，false表明在冒泡阶段调用事件处理程序</li>
+</ul>
+<ul>
+<li>不支持冒泡事件的有<blockquote>
+<p>鼠标事件： mouseleave  mouseenter<br>焦点事件： blur  focus<br>UI事件： scroll  resize  </p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><input disabled type="checkbox"> addEventListener<br>通常我们使用<code>addEventListener</code>注册事件，该函数的第三个参数可以是布尔值，也可以是对象。对于布尔值<code>useCapture</code>参数来说，该参数默认值为<code>false</code>，<code>useCapture</code>决定了注册的事件是捕获事件还是冒泡事件。对于对象参数来说，可以使用以下几个属性</li>
+</ul>
+<ul>
+<li><code>capture</code>：布尔值，和<code>useCapture</code>作用一样</li>
+<li><code>once</code>：布尔值，值为<code>true</code>表示该回调只会调用一次，调用后会移除监听</li>
+<li><code>passive</code>：布尔值，表示永远不会调用<code>preventDefault</code></li>
+</ul>
+<ul>
+<li><input checked disabled type="checkbox"> <p>事件委托（提高性能）<br>在其父元素上设置监听函数，通过事件冒泡，父元素可以监听到子元素上事件的触发，通过判断事件发生元素DOM的类型来做出不同的响应</p>
+</li>
+<li><input checked disabled type="checkbox"> <p>js的new操作符做了什么<br>new操作符创建了一个空对象，这个对象原型指向构造函数的prototype，执行构造函数后返回这个对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function create(fn,...args)&#123;</span><br><span class="line">	//创建空对象</span><br><span class="line">	var obj = new Object()</span><br><span class="line">	//设置原型链</span><br><span class="line">	obj._proto_ = fn.prototype</span><br><span class="line">	//Object.setPrototypeOf(obj, fn.prototype)</span><br><span class="line">	//让fn的this指向obj，并执行fn的函数体</span><br><span class="line">	var result = fn.call(obj)</span><br><span class="line">	//判断返回值是否为对象</span><br><span class="line">	reutrn result instanceof Object ? result : obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><input checked disabled type="checkbox"> <p>this指向<br>this指的是函数运行时所在的环境<br>this总是指向调用该函数的对象</p>
+<blockquote>
+<ol>
+<li>当函数作为对象的方法被调用时，this会指向该对象  </li>
+<li>作为普通函数，this指向window  </li>
+<li>构造器调用，this指向返回的这个对象  </li>
+<li>箭头函数的this绑定看的是this所在函数定义在哪个对象下就绑定哪个对象<br> 箭头函数的this相当于普通变量，在作用域中逐级寻找  </li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li>怎么改变this指向</li>
+</ul>
+<p>1.使用es6箭头函数 2.函数内部使用that=this 3.使用apply、call、bind 4.new实例化一个对象</p>
+<ul>
+<li>bind、apply、call 区别<br>apply、call第一个参数是一样的表示要改变指向的那个对象，第二个参数，apply是数组，call是参数列表形式<br>bind返回一个函数， 并不会立即执行</li>
+</ul>
+<ul>
+<li><input checked disabled type="checkbox"> 深浅拷贝<br>浅拷贝： 一层拷贝，slice()  concat()  Object.assign<br>只会拷贝所有的属性值到新的对象中，如果属性值是对象的话，拷贝的是地址</li>
+</ul>
+<p>深拷贝： 无限层级拷贝</p>
+<ul>
+<li>JSON.parse() 和JSON.stringify()<br>JSON.stringify()把一个js对象序列化为一个json字符串，JSON.parse()将一个json字符串反序列化为一个json对象<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copyObj = JSON.parse(JSON.stringify(obj))</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>缺点： </p>
+<ol>
+<li>无法实现对函数、RegExp等特殊对象的克隆</li>
+<li>会抛弃对象的constructor，所有构造函数会指向Object</li>
+<li>对象有引用循环，会报错</li>
+</ol>
+<ul>
+<li>手动<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function deepCopy(obj)&#123;</span><br><span class="line">    if(!obj &amp;&amp; typeof(obj) !== &apos;object&apos;)&#123;</span><br><span class="line">        throw new Error(&apos;error arguments&apos;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    const targetObj = Array.isArray(obj) ? [] : &#123;&#125;</span><br><span class="line">    for(let key in obj)&#123;</span><br><span class="line">        if(obj[key] &amp;&amp; typeof obj[key] === &apos;object&apos;)&#123;</span><br><span class="line">            targetObj[key] = deepCopy(obj[key])</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            targetObj[key] = obj[key]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return targetObj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>也会出现以上问题<br>由于要对不同的对象（正则、数组、Date等）要采用不同的处理方式，所以要有一个判断对象类型的函数</p>
+<ul>
+<li><input checked disabled type="checkbox"> <p>setTimeout和setInterval机制<br>会把相应的回调函数在event table中注册，一定时间过后，比如说1000，就是1s过后把这个函数移到event queue中，主线程执行完后会从事件队列中读取任务执行</p>
+</li>
+<li><input checked disabled type="checkbox"> <p>eventloop</p>
+</li>
+</ul>
+<ul>
+<li>主线程从上到下执行所有代码</li>
+<li>同步任务直接被执行，异步任务进入Event Table注册相应的回调函数</li>
+<li>全局script执行完毕后，从微任务队列中取任务执行，如果执行过程中又产生微任务就加入队尾，也会在这个阶段被执行</li>
+<li>微任务队列所有任务执行完后取宏任务队列中的任务执行</li>
+<li>宏任务一次只从队列中取一个任务执行执行完就去执行微任务队列</li>
+<li>重复</li>
+</ul>
+<ul>
+<li><input checked disabled type="checkbox"> 前端跨域问题<br>同源策略的限制，协议域名端口有一个不同都不行<br>解决：</li>
+</ul>
+<p>1.jsonp（只能get），原理是动态生成一个script标签，利用script标签的src属性不受同源策略的限制，可以请求第三方服务器资源<br>2.cors，服务器设置Access-Control-Allow-Origin HTTP响应头之后，浏览器将会允许跨域请求<br>3.proxy<br>http-proxy-middleware  用于把请求代理转发到其他服务器</p>
+<ul>
+<li><input checked disabled type="checkbox"> 图片预加载和懒加载</li>
+</ul>
+<ul>
+<li>预加载是为了用户体验良好，减少等待时间，如果有一个页面内容过于庞大，会出现留白<br>实现方法： 1. 使用html标签，<img src="“”" style="“display:none”"></li>
+</ul>
+<p>2.使用image对象</p>
+<ul>
+<li>懒加载：减少请求数，提升用户体验，减少无效资源的加载，防止并发加载的资源过多会阻塞js的加载<br>原理是将页面上的图片的src属性设置为空字符串，而图片的真实路径则是设置在一个自定义的属性，当页面滚动的时候去监听scroll事件，如果图片进入了可视区域就把图片的src值设置为自定义属性里的真实路径值</li>
+</ul>
+<ul>
+<li><input checked disabled type="checkbox"> <p>函数节流和防抖<br>防抖是在短时间内多次触发用一个事件，只会执行最后一次<br>节流是连续触发事件的过程中以一定时间间隔执行函数（释放大招有cd）</p>
+</li>
+<li><input checked disabled type="checkbox"> <p>js垃圾回收机制</p>
+</li>
+</ul>
+<ul>
+<li>引用计数<br>就是看有没有别的对象引用了你，如果没有那就是零引用，对象将被垃圾回收机制回收</li>
+<li>标记清除<br>当一个变量进入环境时 会被标记成“进入环境”，离开环境时被标记成“离开环境”，垃圾回收器在运行的过程中会把在环境中的变量以及在环境中的变量引用的变量的标记清除掉，那么有标记的就是垃圾，会被回收</li>
+</ul>
+<ul>
+<li><input checked disabled type="checkbox"> 一些检验方法</li>
+</ul>
+<ul>
+<li>typeof 能够检测基本类型，但是引用类型都会是object</li>
+<li>instanceof 原理是检测原型，就是比如说var a = new B()  那么a的<strong>proto</strong>属性会等于构造函数B的prototype属性，然后返回true<br>存在的问题：它假定只有一个全局环境，如果网页中包含多个框架，那么实际上就存在两个以上不同的全局执行环境，而存在两个以上不同版本的Array构造函数。注：es5提供了Array.isArray()方法</li>
+<li>constructor </li>
+<li>Object.prototype.toString 返回对象内部属性的<code>[[class]]</code>，其格式为<code>[object xxx]</code> 这个xxx就是对象的类型</li>
+</ul>
+<ul>
+<li><input checked disabled type="checkbox"> splice和splice、map和forEach、filter()、reduce()</li>
+</ul>
+<ul>
+<li>slice(start,end) 返回一个新数组，包含从start到end</li>
+<li>splice(index,howmany,item1,item2…)  从数组中添加或删除项目  (item可选)</li>
+<li>map()  返回一个全新的数组</li>
+<li>forEach 不会返回，只是让数据做一些事情</li>
+<li>reduce  让数组前一项和后一项做某种计算并累计最终值</li>
+<li>filter  过滤，筛选出数组中符合条件的项组成新数组</li>
+</ul>
+<ul>
+<li><input checked disabled type="checkbox"> <p>js/css阻塞<br>js阻塞：所有浏览器在下载js时会阻止一切其他活动<br>css阻塞： 会阻塞dom树的渲染和js的加载、</p>
+</li>
+<li><input checked disabled type="checkbox"> <p>类的创建和继承<br>继承：</p>
+</li>
+</ul>
+<ul>
+<li><p>构造函数<br>在子类型构造函数中调用父类型构造函数，无法继承父类原型链上的属性和方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function SubType()&#123;</span><br><span class="line">	SuperType.call(this)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>原型链<br>让一个引用类型继承另一个引用类型的属性和方法，属性和方法都是共享的。多个实例对引用类型的操作会被篡改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SubType.prototype = new SuperType()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>组合<br>使用原型链实现对原型属性和方法的继承，通过构造函数来实现对实例属性的继承</p>
+</li>
+</ul>
+<blockquote>
+<p>给两个构造函数A和B，如何实现A继承B<br>A.prototype = Object.create(B.prototype)<br>再A的构造函数里new B(props)  </p>
+</blockquote>
+<ul>
+<li>es6的class、extends<br>ES5的继承实质上是先创建子类的实例对象，然后将父类的方法添加到this上<br>ES6的继承实质上是先创建父类的实例对象this，再用子类的构造函数修改this。所以要先调用父类的super函数再使用this</li>
+</ul>
+<ul>
+<li><input disabled type="checkbox"> super</li>
+</ul>
+<ol>
+<li>作为函数调用： 代表父类的构造函数</li>
+<li>作为对象使用： 在普通方法里指向父类的原型对象</li>
+<li>作为对象使用： 在静态方法中指向父类</li>
+</ol>
+<ul>
+<li><input checked disabled type="checkbox"> 闭包和原型</li>
+</ul>
+<ul>
+<li>闭包本质是将函数内部和外部连接起来，优点是可以读取函数内部的变量，让这些变量的值始终保存在内存中，不会在函数被调用后自动清除</li>
+<li>缺陷：增大内存使用量，使用不当会造成内存泄漏<br>如果不是因为某些特殊任务而需要闭包，在没必要的情况下，在其他函数里创建函数是不明智的，因为闭包对脚本性能具有负面影响，包括处理速度和内存消耗</li>
+<li>内存的理解<br>内存溢出：在程序中申请内存时，没有足够的内存空间供使用，出现out of memory<br>内存泄漏： 程序申请内存后，无法释放已申请的内存空间</li>
+<li>作用域<br>由当前环境与上层环境的一系列变量组成，保证当前执行环境里，有权访问的变量和函数是有序的，作用域链变量只能被向上访问</li>
+<li>作用域链<br>当代码在一个环境中执行时，会创建变量对象的一个作用域链，作用域链保证执行环境有权访问的所有变量和函数的有序访问</li>
+<li>原型链<br>让原型对象指向另一个类型的实例，另一个类型也有自己的原型</li>
+</ul>
+<p><img src="167c0772297e4ff8.png" alt></p>
+<ul>
+<li><input disabled type="checkbox"> <p>script标签的async、defer<br>defer：用于开启新的线程下载脚本文件，并使脚本在文档解析完成后执行。多个脚本会按顺序下载和执行<br>async：HTML5新属性，用于异步下载脚本文件，下载完毕执行代码。如果多个脚本之间有依赖关系不推荐用async，因为不能保证执行的先后顺序</p>
+</li>
+<li><input disabled type="checkbox"> <p>FileReader<br>文件读取和图片预览<br>4个方法：</p>
+</li>
+</ul>
+<ul>
+<li>readAsBinaryString：将文件读取为二进制编码</li>
+<li>readAsText：将文件读取为文本</li>
+<li>readAsDataURL：将文件读取为DataURL，将图片文件转换为base64编码</li>
+<li>abort：中断读取操作</li>
+</ul>
+<p>用户上传文件后会生成一个FileList对象</p>
+<ul>
+<li><input disabled type="checkbox"> <p>js基本类型<br>string, number, boolean, undefined, null, symbol<br>引用类型object</p>
+</li>
+<li><input disabled type="checkbox"> <p>null和undefined区别</p>
+</li>
+</ul>
+<ul>
+<li>null表示“没有对象”，即该处不应该有值<br>典型用法：</li>
+</ul>
+<ol>
+<li>作为函数的参数，表示该函数的参数不是对象</li>
+<li>作为对象原型链的终点</li>
+</ol>
+<ul>
+<li>undefined表示“缺少值”，即此处应该有一个值但还没有定义<br>典型用法：</li>
+</ul>
+<ol>
+<li>变量被声明了但没有赋值</li>
+<li>调用函数时应提供的参数没提供</li>
+<li>对象没有赋值的属性</li>
+<li>函数没有返回值默认返回undefined</li>
+</ol>
+<ul>
+<li><input disabled type="checkbox"> requestAnimationFrame<br>为了实现流畅的动画效果，特点：</li>
+</ul>
+<ol>
+<li>将每一帧的dom操作集中起来，在一次重绘或回流中完成，重绘或回流的时间间隔紧紧跟随浏览器的刷新频率</li>
+<li>在隐藏或不可见的元素中不会进行重绘或回流</li>
+<li>运行时浏览器会自动优化方法的调用，页面不是激活状态下动画自动暂停</li>
+</ol>
+<ul>
+<li><input disabled type="checkbox"> <p>数组常用方法<br>push、pop、shift、unshift、splice、sort、reverse、map</p>
+</li>
+<li><input disabled type="checkbox"> <p>数组去重</p>
+</li>
+</ul>
+<ol>
+<li>indexOf<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function unique(arr)&#123;</span><br><span class="line">  let newArr = []</span><br><span class="line">  for(let i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">    if(newArr.indexOf(arr[i])===-1)&#123;</span><br><span class="line">      newArr.push(arr[i])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return newArr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//利用indexOf检测元素在数组中第一次出现的位置是否与元素现在的位置相等</span><br><span class="line">function unique(arr)&#123;</span><br><span class="line">  return arr.filter(function(item,index)&#123;</span><br><span class="line">    return arr.indexOf(item)===index</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>set解构赋值去重</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[…new Set(arr)]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>set和Array.from去重</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Array.from(new Set(arr))</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li><input disabled type="checkbox"> js语言特性</li>
+</ul>
+<ol>
+<li>解释型脚本语言，在程序运行过程中逐行解释</li>
+<li>基于对象</li>
+<li>弱类型语言，较为灵活，对使用的数据类型未作出严格要求</li>
+<li>跨平台性，不依赖于操作系统，仅需浏览器的支持</li>
+</ol>
+<ul>
+<li><input disabled type="checkbox"> SEO搜索引擎优化</li>
+</ul>
+<ol>
+<li>TDK优化</li>
+</ol>
+<ul>
+<li>title 主题明确</li>
+<li>description<br>应用了meta description使摘要具有可读性<br><code>&lt;meta name=“description” content=“介绍了。。。”&gt;</code> </li>
+<li>keywords  设置关键字</li>
+</ul>
+<ol start="2">
+<li>页面内容优化</li>
+</ol>
+<ul>
+<li>html5语义化标签<br>header, footer, section, aside, article,nav<br>重要的用strong强调</li>
+<li>每个页面都有唯一的h1标签</li>
+<li>img设置alt，若宽高固定就设置固定值</li>
+<li>不需要跟踪爬行的链接设置nofollow</li>
+</ul>
+<ol start="3">
+<li>url优化</li>
+</ol>
+<ul>
+<li>统一链接  <code>www.google.com</code> 和 <code>google.com</code></li>
+<li>301跳转（永久移动）</li>
+<li>canonical表示页面的唯一性，用于参数传递的情况</li>
+</ul>
+<ol start="4">
+<li><p>robots<br>搜索引擎蜘蛛访问网站时第一个访问robots.txt（在站点根目录）</p>
+</li>
+<li><p>补充其他</p>
+</li>
+</ol>
+<ul>
+<li>重要内容不要用js输出，因为爬虫不会执行js获取内容</li>
+<li>重要内容html代码放在最前，搜索引擎抓取html顺序从上到下，有的会有抓取长度限制</li>
+<li>提高网站速度</li>
+</ul>
+<ul>
+<li><input disabled type="checkbox"> 前端性能优化</li>
+</ul>
+<ul>
+<li>页面</li>
+</ul>
+<ol>
+<li>通过文件合并、css雪碧图、base64等方法减少http请求数</li>
+<li>通过DNS缓存等机制来减少DNS的查询次数</li>
+<li>通过设置缓存策略，对常用不变的资源进行缓存</li>
+<li>使用延迟加载的方式来减少页面首屏加载时需要请求的资源</li>
+<li>通过用户行为对某些资源使用预加载的方式，提高用户需要访问资源时的响应速度</li>
+</ol>
+<ul>
+<li>服务器</li>
+</ul>
+<ol>
+<li>使用CDN服务</li>
+<li>服务端开启gzip等方式对资源进行压缩</li>
+<li>尽可能减少cookie的大小，有些不需要携带cookie请求到的资源可以分配到其他域名下</li>
+</ol>
+<ul>
+<li>css和js方面</li>
+</ul>
+<ol>
+<li>样式表放在页面的head标签中，减少页面首次渲染时间</li>
+<li>避免使用@import标签</li>
+<li>尽量把js脚本放在页面底部或者使用defer或async属性，避免脚本的加载和执行阻塞页面的渲染</li>
+<li>通过对js和css文件进行压缩来减少文件的体积</li>
+</ol>
+<ul>
+<li><input disabled type="checkbox"> 小程序和H5有什么区别</li>
+</ul>
+<ol>
+<li>渲染方式与H5不同，小程序一般通过Native原生渲染的，H5用web渲染</li>
+<li>小程序特有的双线程设计。H5下所有资源打包在一个bundle.js文件里，而小程序编译后的结果会有两个bundle，index.js封装的是小程序的view层，以及index.woek.js封装的是项目的业务逻辑，在运行时，会有两条线程来分别处理这两个bundle，一个是主渲染线程，一个是service worker线程负责执行业务逻辑</li>
+</ol>
+<p>#前端面试</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/24/CSS/" rel="next" title="CSS">
+                <i class="fa fa-chevron-left"></i> CSS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/24/算法/" rel="prev" title="算法">
+                算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">LZT</p>
+              <p class="site-description motion-element" itemprop="description">ㅋㅋㅋㅋㅋ</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JS"><span class="nav-number">1.</span> <span class="nav-text">JS</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LZT</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

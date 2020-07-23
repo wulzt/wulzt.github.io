@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="登录相关HTTP是无状态的协议，两次请求之间服务器并不会保存任何的数据登录即用某种方法让服务器在多次请求之间能够识别出你从登入到登出这个过程，服务器一直维持一个可识别出用户信息的数据结构，广义来说，该过程就叫session，即保持了一个会话 常见的两种登录 服务器session + 客户端sessionId client  ————  /login POST username&amp;amp;passwo">
+<meta name="description" content="webpack前端资源打包工具，当它处理应用程序时，它会递归地构建一个关系依赖图，其中包含应用程序需要的每个模块，然后把所有的模块打包成一个或多个包   entry入口 1entry: &amp;apos;./main.js&amp;apos;   output输出，告诉webpack在哪输出它所构建的bundles以及如何命名 1234output: &amp;#123;    filename: &amp;apos;bund">
 <meta property="og:type" content="article">
-<meta property="og:title" content="登录相关">
-<meta property="og:url" content="http://yoursite.com/2019/11/05/登录相关/index.html">
+<meta property="og:title" content="webpack">
+<meta property="og:url" content="http://yoursite.com/2020/07/24/webpack/index.html">
 <meta property="og:site_name" content="kowukowuko">
-<meta property="og:description" content="登录相关HTTP是无状态的协议，两次请求之间服务器并不会保存任何的数据登录即用某种方法让服务器在多次请求之间能够识别出你从登入到登出这个过程，服务器一直维持一个可识别出用户信息的数据结构，广义来说，该过程就叫session，即保持了一个会话 常见的两种登录 服务器session + 客户端sessionId client  ————  /login POST username&amp;amp;passwo">
+<meta property="og:description" content="webpack前端资源打包工具，当它处理应用程序时，它会递归地构建一个关系依赖图，其中包含应用程序需要的每个模块，然后把所有的模块打包成一个或多个包   entry入口 1entry: &amp;apos;./main.js&amp;apos;   output输出，告诉webpack在哪输出它所构建的bundles以及如何命名 1234output: &amp;#123;    filename: &amp;apos;bund">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-05T09:03:09.720Z">
+<meta property="og:updated_time" content="2020-07-23T17:27:19.942Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="登录相关">
-<meta name="twitter:description" content="登录相关HTTP是无状态的协议，两次请求之间服务器并不会保存任何的数据登录即用某种方法让服务器在多次请求之间能够识别出你从登入到登出这个过程，服务器一直维持一个可识别出用户信息的数据结构，广义来说，该过程就叫session，即保持了一个会话 常见的两种登录 服务器session + 客户端sessionId client  ————  /login POST username&amp;amp;passwo">
+<meta name="twitter:title" content="webpack">
+<meta name="twitter:description" content="webpack前端资源打包工具，当它处理应用程序时，它会递归地构建一个关系依赖图，其中包含应用程序需要的每个模块，然后把所有的模块打包成一个或多个包   entry入口 1entry: &amp;apos;./main.js&amp;apos;   output输出，告诉webpack在哪输出它所构建的bundles以及如何命名 1234output: &amp;#123;    filename: &amp;apos;bund">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/11/05/登录相关/">
+  <link rel="canonical" href="http://yoursite.com/2020/07/24/webpack/">
 
 
 
 
 
-  <title>登录相关 | kowukowuko</title>
+  <title>webpack | kowukowuko</title>
   
 
 
@@ -270,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/05/登录相关/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/24/webpack/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LZT">
@@ -287,7 +287,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">登录相关</h1>
+          <h1 class="post-title" itemprop="name headline">webpack</h1>
         
 
         <div class="post-meta">
@@ -299,8 +299,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-05T17:02:59+08:00">
-                2019-11-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-24T00:07:42+08:00">
+                2020-07-24
               </time>
             
 
@@ -337,26 +337,59 @@
       
 
       
-        <h1 id="登录相关"><a href="#登录相关" class="headerlink" title="登录相关"></a>登录相关</h1><p>HTTP是无状态的协议，两次请求之间服务器并不会保存任何的数据<br>登录即用某种方法让服务器在多次请求之间能够识别出你<br>从登入到登出这个过程，服务器一直维持一个可识别出用户信息的数据结构，广义来说，该过程就叫session，即保持了一个会话</p>
-<h2 id="常见的两种登录"><a href="#常见的两种登录" class="headerlink" title="常见的两种登录"></a>常见的两种登录</h2><ol>
-<li><p>服务器session + 客户端sessionId<br> client  ————  /login POST username&amp;password  ————&gt;  server<br> client  &lt;——— response 200 set-Cookie sessionId: xxx ———  server<br> client  ———— _api_userinfo GET cookie: sessionId=xxx  ———&gt; server</p>
+        <h1 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h1><p>前端资源打包工具，当它处理应用程序时，它会递归地构建一个关系依赖图，其中包含应用程序需要的每个模块，然后把所有的模块打包成一个或多个包</p>
+<ul>
+<li><input disabled type="checkbox"> <p>entry<br>入口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">entry: &apos;./main.js&apos;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>token<br>把用户的状态信息加密成一串token传给前端，请求时带上，服务器收到请求后，解析token并验证相关信息</p>
+<li><input disabled type="checkbox"> <p>output<br>输出，告诉webpack在哪输出它所构建的bundles以及如何命名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">    filename: &apos;bundle.js&apos;,</span><br><span class="line">    path: path.resolve(__dirname,&apos;./dist&apos;)</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<p>业内通用加密方式 jwt (json web token)</p>
-<p>放在HTTP header中<br>Authorization: Bearer <token></token></p>
-<h2 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h2><p>sessin：<br>    1. 在服务端维护session信息，单机还好，多机还要在服务器间同步session信息，服务横向扩展不便<br>    2. session 数量随登录用户增多而增多<br>    3. session + cookie 里存sessionId的方式可能会有CSRF攻击，常见用csrf-token 解决</p>
-<p>jwt：<br>    1. 过期时间需结合业务作设置，且jwt一旦派发出去，后端无法强行使其作废</p>
-<h3 id="CSRF攻击"><a href="#CSRF攻击" class="headerlink" title="CSRF攻击"></a>CSRF攻击</h3><p>跨站域请求伪造</p>
-<p>当前防御的几种策略</p>
+<li><input disabled type="checkbox"> <p>plugins<br>从打包优化和压缩，一直到重新定义环境中的变量。插件接口功能及其强大，可以用来处理各种各样的任务</p>
+</li>
+</ul>
+<p>用法是<br>require引用插件<br>用new操作符创建它的一个实例</p>
+<p>比如说html-webpack-plugin，可以以一个html为模版生成html文件并注入所有生成的bundle</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">  new MiniCssExtractPlugin(&#123;</span><br><span class="line">    filename: `[name]_[contenthash:8].css`,</span><br><span class="line">    chunkFilename: &apos;[id].css&apos;</span><br><span class="line">  &#125;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><input disabled type="checkbox"> <p>module.rules</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">module: &#123;</span><br><span class="line">  rules: [</span><br><span class="line">    &#123;</span><br><span class="line">      test: /\.js$/,</span><br><span class="line">      use: [</span><br><span class="line">        &#123;loader: &apos;babel-loader&apos;&#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><input disabled type="checkbox"> <p>loader</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;test: /\.js$/, loader: &apos;babel-loader&apos;, exclude: /node_modules/ &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>babel-loader, css-loader, vue-loader, url-loader<br>对代码进行加工处理再输出</p>
+<h2 id="webpack4"><a href="#webpack4" class="headerlink" title="webpack4"></a>webpack4</h2><p>提升速度</p>
+<ul>
+<li><input disabled type="checkbox"> mini-css-extract-plugin成为css打包首选<br>优点：</li>
+</ul>
 <ol>
-<li>验证HTTP Referer字段<br>http头部有个字段Referer记录了该HTTP请求的来源地址<br>只需在最后给所有安全敏感的请求统一增加一个拦截器来检查Referer的值</li>
+<li>异步加载</li>
+<li>不重复编译，性能更好</li>
+<li>更容易使用</li>
 </ol>
-<p>缺点： Referer的值由浏览器提供，各浏览器实现不一<br>侵犯隐私，用户可以自行设置不发Referer</p>
-<ol start="2">
-<li>token</li>
+<ul>
+<li><input disabled type="checkbox"> <p>webpack-parallel-uglify-plugin插件<br>将任务分解成多个子进程去并发执行，子进程处理完将结果发送给主进程，从而实现并发编译，提高js压缩速度<br>（node是单线程但可以fork子进程）</p>
+</li>
+<li><input disabled type="checkbox"> <p>HappyPack<br>也能实现并发编译，提升loader的解析速度</p>
+</li>
+<li><input disabled type="checkbox"> <p>DLLPlugin和DLLReferencePlugin<br>可将框架代码（babel-polyfill、vue、vue-router、vuex、axios、element-ui、fastclick等）提前打包，避免重复加载</p>
+</li>
+</ul>
+<h2 id="打包流程"><a href="#打包流程" class="headerlink" title="打包流程"></a>打包流程</h2><p>串行过程</p>
+<ol>
+<li>初始化参数： 从配置文件和shell语句中读取并合并参数，得到最终参数</li>
+<li>开始编译： 用上一步得到的参数初始化compiler对象，加载所有配置的插件，执行对象的run方法开始执行编译</li>
+<li>确定入口： 根据配置中的entry找到所有入口文件</li>
+<li>编译模块： 从入口文件触发，调用所有配置的loader对模块进行翻译，再找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过了本步骤的处理</li>
+<li>完成模块编译： 在经过4后得到了每个模块被翻译后的最终内容以及它们之间的依赖关系</li>
+<li>输出资源： 根据入口和模块之间的依赖关系，组装成一个个包含多个模块的chunk，再把每一个chunk转换成一个单独的文件加入到输出列表</li>
+<li>输出完成： 根据配置确定输出的路径和文件名，把文件内容写到文件系统</li>
 </ol>
+<p>#前端面试</p>
 
       
     </div>
@@ -381,8 +414,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/18/HTTP缓存/" rel="next" title="webpack">
-                <i class="fa fa-chevron-left"></i> webpack
+              <a href="/2020/07/24/模块化/" rel="next" title="模块化">
+                <i class="fa fa-chevron-left"></i> 模块化
               </a>
             
           </div>
@@ -391,8 +424,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/11/05/flex布局/" rel="prev" title="flex布局">
-                flex布局 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/07/24/Vue/" rel="prev" title="Vue">
+                Vue <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -507,7 +540,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#登录相关"><span class="nav-number">1.</span> <span class="nav-text">登录相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的两种登录"><span class="nav-number">1.1.</span> <span class="nav-text">常见的两种登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存在的问题"><span class="nav-number">1.2.</span> <span class="nav-text">存在的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSRF攻击"><span class="nav-number">1.2.1.</span> <span class="nav-text">CSRF攻击</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#webpack"><span class="nav-number">1.</span> <span class="nav-text">webpack</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack4"><span class="nav-number">1.1.</span> <span class="nav-text">webpack4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打包流程"><span class="nav-number">1.2.</span> <span class="nav-text">打包流程</span></a></li></ol></li></ol></div>
             
 
           </div>

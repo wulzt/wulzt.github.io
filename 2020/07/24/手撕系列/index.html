@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="手撕系列倒计时纠偏 原理： 通过递归调用setTimeout 进行倒计时操作的执行，而每次执行函数时都会维护一个count变量，用以记录已经执行过的倒计时次数offset = new Date().getTime() - (startTime + count * interval)算出当前倒计时时间和实际应执行时间的偏差，从而计算出下次执行倒计时的时间    1234567891011121314">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手撕系列">
+<meta property="og:url" content="http://yoursite.com/2020/07/24/手撕系列/index.html">
+<meta property="og:site_name" content="kowukowuko">
+<meta property="og:description" content="手撕系列倒计时纠偏 原理： 通过递归调用setTimeout 进行倒计时操作的执行，而每次执行函数时都会维护一个count变量，用以记录已经执行过的倒计时次数offset = new Date().getTime() - (startTime + count * interval)算出当前倒计时时间和实际应执行时间的偏差，从而计算出下次执行倒计时的时间    1234567891011121314">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-07-23T17:25:24.302Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手撕系列">
+<meta name="twitter:description" content="手撕系列倒计时纠偏 原理： 通过递归调用setTimeout 进行倒计时操作的执行，而每次执行函数时都会维护一个count变量，用以记录已经执行过的倒计时次数offset = new Date().getTime() - (startTime + count * interval)算出当前倒计时时间和实际应执行时间的偏差，从而计算出下次执行倒计时的时间    1234567891011121314">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'T8XBOJJNFX',
+      apiKey: '59ff9e3b216c019eeb2f6c073cef5a49',
+      indexName: 'wulzt',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/07/24/手撕系列/">
+
+
+
+
+
+  <title>手撕系列 | kowukowuko</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">kowukowuko</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">move now</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/24/手撕系列/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LZT">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kowukowuko">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">手撕系列</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-24T00:04:42+08:00">
+                2020-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="手撕系列"><a href="#手撕系列" class="headerlink" title="手撕系列"></a>手撕系列</h1><h2 id="倒计时纠偏"><a href="#倒计时纠偏" class="headerlink" title="倒计时纠偏"></a>倒计时纠偏</h2><blockquote>
+<p>原理： 通过递归调用setTimeout 进行倒计时操作的执行，而每次执行函数时都会维护一个count变量，用以记录已经执行过的倒计时次数<br><code>offset = new Date().getTime() - (startTime + count * interval)</code>算出当前倒计时时间和实际应执行时间的偏差，从而计算出下次执行倒计时的时间  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">const interval = 1000</span><br><span class="line">let ms = 50000</span><br><span class="line">let count = 0</span><br><span class="line">const startTime = new Date().getTime()</span><br><span class="line">let timeCounter</span><br><span class="line">if(ms &gt;= 0)&#123;</span><br><span class="line">  timeCounter = setTimeOut(countDownStart,interval)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function countDownStart()&#123;</span><br><span class="line">  count++</span><br><span class="line">  const offset = new Date().getTIme() - (startTime + count * interval)</span><br><span class="line">  const nextTime = interval - offset</span><br><span class="line">  if(nextTime &lt; 0)</span><br><span class="line">    nextTime = 0</span><br><span class="line">  ms -= interval</span><br><span class="line">  console.log(`误差：$&#123;offset&#125;ms, 下一次执行：$&#123;nextTime&#125;ms后,离活动开始还有$&#123;ms&#125;ms`)</span><br><span class="line">  if(ms &lt; 0)&#123;</span><br><span class="line">    clearTimeOut(timeCounter)</span><br><span class="line">  &#125;else&#123;</span><br><span class="line">    timeCounter = setTimeOut(countDownStart, nextTime)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="call"><a href="#call" class="headerlink" title="call"></a>call</h2><blockquote>
+<p>理解成在传入的执行域中执行该函数。即：将函数赋值给执行域然后执行  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Function.prototype.MyCall = function(context)&#123;</span><br><span class="line">  context = context || window</span><br><span class="line">  context.fn = this</span><br><span class="line">  let args = [...arguments].slice(1)</span><br><span class="line">  context.fn(...args)</span><br><span class="line">  delete context.fn</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h2><blockquote>
+<p>返回函数  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Function.prototype.MyBind(context)&#123;</span><br><span class="line">  let args = [...arguments].slice(1)</span><br><span class="line">  let self = this</span><br><span class="line">  return function()&#123;</span><br><span class="line">    let newArgs = [...arguments]</span><br><span class="line">    return self.call(context,args.concat(newArgs))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><blockquote>
+<p>等你在一段时间内都不再触发了我再执行。<br>每次触发都重新设置一个定时器  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function debounce(fn,interval)&#123;</span><br><span class="line">  let timer</span><br><span class="line">  return function(...args)&#123;</span><br><span class="line">    let self = this</span><br><span class="line">    if(timer)&#123;</span><br><span class="line">      clearTimeOut(timer)</span><br><span class="line">      timer = setTimeOut(()=&gt;&#123;</span><br><span class="line">        fn.call(self,args)</span><br><span class="line">      &#125;,interval)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><blockquote>
+<p>触发执行后一段时间内不能再触发，就像游戏里的cd<br>记录触发执行的时间last，每次判断当前时间now - last是否大于规定的间隔  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function throttle(fn,wait)&#123;</span><br><span class="line">  let last = 0</span><br><span class="line">  return (...args)=&gt;&#123;</span><br><span class="line">    let now = new Date()</span><br><span class="line">    if(now - last &gt; wait)&#123;</span><br><span class="line">      last = now</span><br><span class="line">      fn(args)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="instanceOf"><a href="#instanceOf" class="headerlink" title="instanceOf"></a>instanceOf</h2><blockquote>
+<p>顺着对象的_proto_去寻找有没有函数的prototype  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function instanceOf(L,R)&#123;</span><br><span class="line">  let LO = L._proto_,</span><br><span class="line">    RO = R.prototype</span><br><span class="line">  while(true)&#123;</span><br><span class="line">    if(LO=== null) return false</span><br><span class="line">    if(LO === RO)</span><br><span class="line">      return true</span><br><span class="line">    LO = LO._proto_</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="模拟new"><a href="#模拟new" class="headerlink" title="模拟new"></a>模拟new</h2><blockquote>
+<p>创建一个对象，绑定函数的原型，执行函数并返回结果  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function create(fn,...args)&#123;</span><br><span class="line">  let obj = new Object()</span><br><span class="line">  obj._proto_ = fn.prototype</span><br><span class="line">  let result = fn.call(obj,args)</span><br><span class="line">  return result instanceOf Object ? resut : obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="组合继承"><a href="#组合继承" class="headerlink" title="组合继承"></a>组合继承</h2><blockquote>
+<p>子类的构造函数里调用父类构造函数，子类原型对象指向父类实例  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function SuperType(name)&#123;</span><br><span class="line">  this.name = name</span><br><span class="line">  this.colors = [&apos;red&apos;,&apos;green&apos;,&apos;blue&apos;]</span><br><span class="line">&#125;</span><br><span class="line">SuperType.prototype.sayName = function()&#123;</span><br><span class="line">  console.log(this.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function SubType(name,age)&#123;</span><br><span class="line">  SuperType.call(this,name)</span><br><span class="line">  this.age = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SubType.prototype = new SuperType()</span><br><span class="line">SubType.prototype.constructor = SubType</span><br><span class="line">SubType.prototype.sayAge = function()&#123;</span><br><span class="line">  console.log(this.age);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h2><blockquote>
+<p><code>jsonp(&#39;http://baidu.com&#39;,{wd:&#39;ha&#39;},&#39;jsonpCB&#39;)</code><br>拼接URL，创建script标签插入document  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function jsonp(url,data=&#123;&#125;,callback=&apos;callback&apos;)&#123;</span><br><span class="line">  let params = []</span><br><span class="line">  for(let key in data)&#123;</span><br><span class="line">    params.push(key + &apos;=&apos; + data[key])</span><br><span class="line">  &#125;</span><br><span class="line">  let script = document.createElement(&apos;script&apos;)</span><br><span class="line">  script.src = url + &apos;?&apos; + params.join(&apos;&amp;&apos;)</span><br><span class="line">  document.appendChild(script)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="正则，转驼峰命名"><a href="#正则，转驼峰命名" class="headerlink" title="正则，转驼峰命名"></a>正则，转驼峰命名</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var str = &apos;get-element-by-id&apos;</span><br><span class="line">function fn = function(s)&#123;</span><br><span class="line">  return s.replace(/-\w/g,function(x)&#123;</span><br><span class="line">    return x.slice(1).toUpperCase()</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><blockquote>
+<p>当对象第一次被创建以后，重写构造函数，在重写后的构造函数里访问私有变量  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function singleSample(name)&#123;</span><br><span class="line">	this.name = name</span><br><span class="line">	var instance = this</span><br><span class="line">	singleSample = function()&#123;</span><br><span class="line">		return instance</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="发布订阅模式"><a href="#发布订阅模式" class="headerlink" title="发布订阅模式"></a>发布订阅模式</h2><blockquote>
+<p>on 订阅<br>emit 发布  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 发布</span><br><span class="line">event.emit(‘pet’, [‘二哈’, ‘波斯猫’]);</span><br><span class="line">//订阅</span><br><span class="line">event.on(‘pet’, data =&gt; &#123;</span><br><span class="line">    console.log(‘接收数据’);</span><br><span class="line">    console.log(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let event = &#123;</span><br><span class="line">  list: &#123;&#125;,</span><br><span class="line">  //订阅</span><br><span class="line">  on(key,fn)&#123;</span><br><span class="line">    if(!this.list[key])&#123;</span><br><span class="line">      this.list[key] = []</span><br><span class="line">    &#125;</span><br><span class="line">    this.list[key].push(fn)</span><br><span class="line">  &#125;</span><br><span class="line">  //发布</span><br><span class="line">  emit(key,...args)&#123;</span><br><span class="line">    if(!this.list[key]||this.list[key].length===0) return false</span><br><span class="line">    this.list[key].forEach(fn=&gt;&#123;</span><br><span class="line">      fn.apply(this,args)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="前端路由"><a href="#前端路由" class="headerlink" title="前端路由"></a>前端路由</h2><p><a href="https://juejin.im/post/5ac61da66fb9a028c71eae1b" target="_blank" rel="noopener">面试官: 你了解前端路由吗? - 掘金</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class Routers &#123;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">    this.routers = &#123;&#125;</span><br><span class="line">    this._bindPopState()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 初始化路由</span><br><span class="line">  init(path) &#123;</span><br><span class="line">    history.replaceState(&#123;</span><br><span class="line">      path: path</span><br><span class="line">    &#125;, null, path);</span><br><span class="line">    this.routes[path] &amp;&amp; this.routes[path]();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  //添加路由和回调</span><br><span class="line">  route(path, callback) &#123;</span><br><span class="line">    this.routers[path] = callback || function() &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  go(path) &#123;</span><br><span class="line">    //添加历史记录但不触发跳转</span><br><span class="line">    history.pushState(&#123;</span><br><span class="line">      path</span><br><span class="line">    &#125;, null, path)</span><br><span class="line">    this.routers[path] &amp;&amp; this.routers[path]()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  _bindPopState() &#123;</span><br><span class="line">    window.addEventListener(&apos;popstate&apos;, e =&gt; &#123;</span><br><span class="line">      const path = e.state &amp;&amp; e.state.path</span><br><span class="line">      this.routers[path] &amp;&amp; this.routers[path]()</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>#前端面试</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/24/算法/" rel="next" title="算法">
+                <i class="fa fa-chevron-left"></i> 算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/24/服务器端/" rel="prev" title="服务器端">
+                服务器端 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">LZT</p>
+              <p class="site-description motion-element" itemprop="description">ㅋㅋㅋㅋㅋ</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#手撕系列"><span class="nav-number">1.</span> <span class="nav-text">手撕系列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#倒计时纠偏"><span class="nav-number">1.1.</span> <span class="nav-text">倒计时纠偏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#call"><span class="nav-number">1.2.</span> <span class="nav-text">call</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bind"><span class="nav-number">1.3.</span> <span class="nav-text">bind</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防抖"><span class="nav-number">1.4.</span> <span class="nav-text">防抖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#节流"><span class="nav-number">1.5.</span> <span class="nav-text">节流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#instanceOf"><span class="nav-number">1.6.</span> <span class="nav-text">instanceOf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟new"><span class="nav-number">1.7.</span> <span class="nav-text">模拟new</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合继承"><span class="nav-number">1.8.</span> <span class="nav-text">组合继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsonp"><span class="nav-number">1.9.</span> <span class="nav-text">jsonp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则，转驼峰命名"><span class="nav-number">1.10.</span> <span class="nav-text">正则，转驼峰命名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式"><span class="nav-number">1.11.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布订阅模式"><span class="nav-number">1.12.</span> <span class="nav-text">发布订阅模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端路由"><span class="nav-number">1.13.</span> <span class="nav-text">前端路由</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LZT</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
